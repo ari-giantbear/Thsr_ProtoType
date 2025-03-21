@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高鐵訂位</title>
+    <style>
+        body {
+            font-family: "Microsoft JhengHei", Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f8f8;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            margin-bottom: 5px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .section {
+            margin-bottom: 20px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 5px;
+            font-size: 18px;
+            color: #333;
+        }
+        .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        label {
+            font-weight: bold;
+            color: #555;
+            width: 30%;
+        }
+        input, select {
+            flex-grow: 1;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .radio-group, .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 5px;
+        }
+        .radio-group div, .checkbox-group div {
+            display: flex;
+            /* align-items: center; */
+            align-items: flex-start;
+            width: 100%;
+        }
+        .radio-group input, .checkbox-group input {
+            margin-right: 5px;
+        }
+        .info-list {
+            font-size: 14px;
+            color: #666;
+            padding-left: 15px;
+        }
+        .info-list li {
+            margin-bottom: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #f37021;
+            border: none;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+        button:hover {
+            background: #d95b1c;
+        }
+        /**/
+        .title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .ticket-box {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+        }
+        .ticket {
+            width: 48%;
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        .ticket-title {
+            background: #333;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 3px;
+            display: inline-block;
+        }
+        .info {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        .time-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .time {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .station {
+            font-size: 14px;
+            color: #666;
+        }        
+        .detail {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #666;
+        }    </style>
+    <script>
+        function toggleTgoInput() {
+            var tgoInput = document.getElementById("tgoInputSection");
+            var tgoRadio = document.getElementById("tgoMember");
+            tgoInput.style.display = tgoRadio.checked ? "block" : "none";
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            var radios = document.getElementsByName("member");
+            radios.forEach(radio => {
+                radio.addEventListener("change", toggleTgoInput);
+            });
+            toggleTgoInput();
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="title">訂位明細</div>
+        <div class="ticket-box">
+            <div class="ticket">
+                <div class="ticket-title">去程</div>
+                <div class="info">03/20  |  🚆 621</div>
+                <div class="time-box">
+                    <div>
+                        <div id="dept-start" class="time">09:46</div>
+                        <div class="station">台北</div>
+                    </div>
+                    <div>
+                        <div id="dept-end" class="time">10:46</div>
+                        <div class="station">台中</div>
+                    </div>
+                </div>
+            </div>
+            <div class="ticket">
+                <div class="ticket-title">回程</div>
+                <div class="info">03/31  |  🚆 622</div>
+                <div class="time-box">
+                    <div>
+                        <div id="return-start" class="time">10:32</div>
+                        <div class="station">台中</div>
+                    </div>
+                    <div>
+                        <div id="return-end" class="time">11:33</div>
+                        <div class="station">台北</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="detail">
+            <span>車廂：</span>
+            <span>標準車廂</span>
+        </div>
+        <div class="detail">
+            <span>票數：</span>
+            <span>全票 2 張</span>
+        </div>
+    </div>    
+
+    <div class="container">
+        <div class="section">
+            <h2>取票人資訊</h2>
+            <div class="form-group">
+                <label for="idType">取票證別</label>
+                <select id="idType">
+                    <option>身分證字號</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="idNumber">身分證字號</label>
+                <input type="text" id="idNumber">
+            </div>
+            <div class="form-group">
+                <label for="phone">聯絡電話</label>
+                <input type="text" id="phone">
+            </div>
+            <div class="form-group">
+                <label for="email">電子郵件</label>
+                <input type="email" id="email">
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>乘客資訊</h2>
+            <div class="form-group">
+                <label for="passenger1">乘客 1 - 登心票</label>
+                <input type="text" id="passenger1" placeholder="身分證字號">
+            </div>
+            <div class="form-group">
+                <label for="passenger2">乘客 2 - 登心票</label>
+                <input type="text" id="passenger2" placeholder="身分證字號">
+            </div>
+            <ul class="info-list">
+                <li>購買敬老票、愛心票應填寫搭乘者之中華民國身分證字號。</li>
+                <li>愛心票之受理資格者應隨身攜帶愛心陪伴卡或其他證明文件。</li>
+                <li>兒童票適用於六歲以上但未滿十二歲之兒童。</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>高鐵會員資訊</h2>
+            <ul class="info-list">
+                <li>輸入高鐵會員 TGo 帳號，可累積會員點數並享有專屬回饋。</li>
+                <li>高鐵會員 TGo 無法與企業會員同時累計，請擇一填寫。</li>
+            </ul>
+            <div class="radio-group">
+                <div><input type="radio" id="nonMember" name="member" checked>
+                    <div for="nonMember">非高鐵會員 TGo / 企業會員</div>
+                </div>
+                <div><input type="radio" id="tgoMember" name="member">
+                    <div for="tgoMember">高鐵會員 TGo 帳號</div>
+                    <input type="text" id="tgoInputSection" placeholder="請輸入帳號">
+                    <!-- <div id="tgoInputSection">
+                        <input type="text" id="tgoNumberText" placeholder="請輸入帳號">
+                    </div> -->
+                </div>
+            </div>
+
+            <!--
+            <div id="tgoInputSection" class="tgo-input">
+                <div class="form-group">
+                    <div for="tgoNumber">高鐵會員 TGo 帳號</div>
+                    <input type="text" id="tgoNumber" placeholder="請輸入帳號">
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" id="sameAsId">
+                    <div for="sameAsId">同取票人身分證字號</div>
+                </div>
+                <p class="info-list">相關會員權益詳見 <a href="#">高鐵會員 TGo 會員權益</a>。</p>
+            </div>-->
+        </div>
+
+        <div class="section">
+            <div class="checkbox-group">
+                <div>
+                    <input type="checkbox" id="agree">
+                    <div for="agree">我已明確了解線上購票交易及取票規則</div>
+                </div>
+            </div>
+            <button onclick="window.location='step4.html'">完成訂位</button>
+        </div>
+    </div>
+</body>
+</html>

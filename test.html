@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>車票資訊</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .ticket {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: black;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .time {
+            display: flex;
+            justify-content: space-between;
+            font-size: 20px;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+        .station {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .seats {
+            margin-top: 10px;
+        }
+        .seats span {
+            background: #ddd;
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        .details {
+            margin-top: 15px;
+            color: blue;
+            cursor: pointer;
+        }
+        .price {
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="ticket">
+        <div class="header">去程 03/20</div>
+        <div class="time">
+            <div>
+                <span>20:11</span>
+                <div class="station">台北</div>
+            </div>
+            <div>▶</div>
+            <div>
+                <span>21:39</span>
+                <div class="station">雲林</div>
+            </div>
+        </div>
+        <div class="seats">
+            <span>2車16E</span>
+            <span>2車16D</span>
+        </div>
+        <div class="details">詳細內容</div>
+        <div class="price">
+            <span>全票 x2</span>
+            <span>TWD 1,860</span>
+        </div>
+        <div class="price">
+            <span>小計</span>
+            <span>TWD 1,860</span>
+        </div>
+    </div>
+</body>
+</html>

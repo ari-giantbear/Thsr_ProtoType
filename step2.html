@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>車次選擇</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f8f8f8;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .train-option {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            transition: background 0.3s;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        .train-option.selected {
+            background: #e0f0ff;
+            border-color: #007bff;
+        }
+        .train-no, .duration {
+            color: #666;
+            font-size: 14px;
+        }
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        .navigation a {
+            color: #007bff;
+            cursor: pointer;
+        }
+        .summary {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .summary,
+        .container .detail {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #666;
+        }
+
+
+        .title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .ticket-box {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+        }
+        .ticket {
+            width: 48%;
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        .ticket-title {
+            background: #333;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 3px;
+            display: inline-block;
+        }
+        .info {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        .time-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .time {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .station {
+            font-size: 14px;
+            color: #666;
+        }
+        .confirm-btn {
+            display: block;
+            width: 100%;
+            background: #e65100;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 20px;
+            cursor: pointer;
+        }      
+
+        .notice {
+            margin-top: 20px;
+            padding: 10px;
+            background: #f9f9f9;
+            border-left: 4px solid #ff9800;
+        }
+        .notice-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+    </style>
+    <script>
+        let departureIndex = 0;
+        let returnIndex = 0;
+        let selectedDeparture = '';
+        let selectedReturn = '';
+
+        let selectedDeptStart = '';
+        let selectedDeptEnd = '';
+        let selectedReturnStart = '';
+        let selectedReturnEnd = '';
+        
+        const trains = Array.from({ length: 20 }, (_, i) => ({
+            startTime: `${12 + Math.floor(i / 2)}:${(30 + i * 3) % 60}`,
+            endTime: `${13 + Math.floor(i / 2)}:${(33 + i * 3) % 60}`,
+            time: `${12 + Math.floor(i / 2)}:${(30 + i * 3) % 60} → ${13 + Math.floor(i / 2)}:${(33 + i * 3) % 60}`,
+            duration: `⏱ 1:${(i % 3) + 1}`,
+            trainNo: `🚆 ${600 + i}`
+        }));
+        
+        function renderTrains(type, index) {
+            const container = document.querySelector(`.${type} .train-list`);
+            container.innerHTML = '';
+            trains.slice(index, index + 5).forEach(train => {
+                const div = document.createElement('div');
+                div.className = 'train-option';
+                div.onclick = () => selectTrain(div, type, train);
+                div.innerHTML = `<div class='time'>${train.time}</div><div class='duration'>${train.duration}</div><div class='train-no'>${train.trainNo}</div>`;
+                container.appendChild(div);
+            });
+        }
+        
+        function changeTrains(type, direction) {
+            if (type === 'departure') {
+                departureIndex = Math.max(0, Math.min(15, departureIndex + direction * 5));
+                renderTrains(type, departureIndex);
+            } else {
+                returnIndex = Math.max(0, Math.min(15, returnIndex + direction * 5));
+                renderTrains(type, returnIndex);
+            }
+        }
+        
+        function selectTrain(element, type, train) {
+            document.querySelectorAll(`.${type} .train-option`).forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+            if (type === 'departure') {
+                selectedDeparture = train.time;
+                selectedDeptStart = train.startTime;
+                selectedDeptEnd = train.endTime;
+            } else {
+                selectedReturn = train.time;
+                selectedReturnStart = train.startTime;
+                selectedReturnEnd = train.endTime;
+            }
+            updateSummary();
+        }
+        
+        function updateSummary() {
+            document.getElementById("dept-start").textContent = selectedDeptStart || '00:00';
+            document.getElementById("dept-end").textContent = selectedDeptEnd || '00:00';
+            document.getElementById("return-start").textContent = selectedReturnStart || '00:00';
+            document.getElementById("return-end").textContent = selectedReturnEnd || '00:00';
+        }
+        
+        window.onload = function() {
+            renderTrains('departure', departureIndex);
+            renderTrains('return', returnIndex);
+        };
+    </script>
+</head>
+<body>
+    <div class="container departure">
+        <div class="title">去程：(台北 → 台中)</div>
+        <div class="date">2025/03/20 (星期四)</div>
+        <div class="train-list"></div>
+        <div class="navigation">
+            <a onclick="changeTrains('departure', -1)">← 更早車次</a>
+            <a onclick="changeTrains('departure', 1)">更晚車次 →</a>
+        </div>
+    </div>
+    
+    <div class="container return">
+        <div class="title">回程：(台中 → 台北)</div>
+        <div class="date">2025/03/31 (星期日)</div>
+        <div class="train-list"></div>
+        <div class="navigation">
+            <a onclick="changeTrains('return', -1)">← 更早車次</a>
+            <a onclick="changeTrains('return', 1)">更晚車次 →</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="title">訂位明細</div>
+        <div class="ticket-box">
+            <div class="ticket">
+                <div class="ticket-title">去程</div>
+                <div class="info">03/20  |  🚆 621</div>
+                <div class="time-box">
+                    <div>
+                        <div id="dept-start" class="time">09:46</div>
+                        <div class="station">台北</div>
+                    </div>
+                    <div>
+                        <div id="dept-end" class="time">10:46</div>
+                        <div class="station">台中</div>
+                    </div>
+                </div>
+            </div>
+            <div class="ticket">
+                <div class="ticket-title">回程</div>
+                <div class="info">03/31  |  🚆 622</div>
+                <div class="time-box">
+                    <div>
+                        <div id="return-start" class="time">10:32</div>
+                        <div class="station">台中</div>
+                    </div>
+                    <div>
+                        <div id="return-end" class="time">11:33</div>
+                        <div class="station">台北</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="detail">
+            <span>車廂：</span>
+            <span>標準車廂</span>
+        </div>
+        <div class="detail">
+            <span>票數：</span>
+            <span>全票 2 張</span>
+        </div>
+        
+
+        <button class="confirm-btn" onclick="window.location='step3.html'">確認車次</button>
+    </div>    
+
+    <div class="container">
+        <div class="notice-title">注意事項</div>
+        <ol>
+            <li>本網頁顯示內容為目前於訂位系統搜尋到的可訂車次及票價，實際訂位結果仍以「完成訂位」頁面之內容為主。</li>
+            <li>列車時刻及優惠資訊若有變動，以各車站現場公告為準。</li>
+        </ol>
+    </div>
+    
+</body>
+<script>updateSummary();</script>
+</html>

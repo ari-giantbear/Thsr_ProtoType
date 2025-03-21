@@ -1,0 +1,141 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f8f8f8;
+
+    /* font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0; */
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.ticket-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+label {
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.station-selection,
+.date-selection,
+.time-selection,
+.ticket-types {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.station-selection label,
+.date-selection,
+.time-selection,
+.ticket-types label {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 讓內容居中 */
+    flex: 1;
+}
+
+select, input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.exchange {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+button {
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #c9302c;
+}
+
+.details-link {
+    color: blue;
+    font-size: 12px;
+}
+
+/* RWD 設計 */
+@media (max-width: 768px) {
+    .container {
+        width: 100%;
+        padding: 15px;
+    }
+
+    .ticket-form {
+        flex-direction: column;
+    }
+
+    .station-selection,
+    .date-selection,
+    .time-selection {
+        display: flex;
+        flex-direction: column;
+        width: 100%; /* 讓下拉選單與輸入框等寬 */
+    }
+
+    select, input {
+        font-size: 14px;
+        padding: 6px;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .ticket-types {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .ticket-types label {
+        width: 100%;
+    }
+
+    .ticket-types select {
+        width: 100%; /* 讓下拉選單與輸入框等寬 */
+    }
+}
+

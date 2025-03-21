@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>訂位明細</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin: auto;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+        }
+        .order-id {
+            font-size: 18px;
+            color: #333;
+        }
+        .paid {
+            color: red;
+            font-weight: bold;
+        }
+        .trip-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        .section {
+            flex: 1;
+            min-width: 280px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: #fdfdfd;
+        }
+        .trip {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 0;
+        }
+        .trip .left {
+            text-align: left;
+            font-weight: bold;
+        }
+        .trip-station {
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .trip .right {
+            text-align: right;
+            font-weight: bold;
+        }
+        .details {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+        }
+        .price {
+            font-size: 20px;
+            font-weight: bold;
+            text-align: right;
+            margin-top: 10px;
+            color: #333;
+        }
+        .button {
+            align-self: center;
+            display: block;
+            width: 90%;
+            background: #ff6600;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 5px;
+            margin-top: 20px;
+            text-decoration: none;
+        }
+        .reminder {
+            font-size: 14px;
+            color: #666;
+            margin-top: 10px;
+            line-height: 1.5;
+        }
+        .ticket-title {
+            background: #333;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+            display: inline-block;
+        }
+        .seat-box {
+            display: inline-block;
+            padding: 2px 6px;
+            margin: 1px;
+            border: 1px solid #666;
+            border-radius: 3px;
+            background: #ddd;
+            font-size: 14px;
+            font-weight:normal;
+        }        
+        .details-link {
+            color: rgba(91, 92, 165, 0.622);
+            font-size: 12px;
+        }        
+        .through {
+            color: rgba(164, 165, 214, 0.622);
+            font-size: 14px;
+        }        
+        @media (max-width: 768px) {
+            .trip-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="order-id">去程訂位代號：05131244</div>
+            <div class="order-id">回程訂位代號：05134542</div>
+            <div class="paid">完成付款</div>
+        </div>
+        <p class="details">取票識別碼：Y12*****60</p>
+        <p class="details">聯絡電話：0930***0328</p>
+        <p class="details">電子郵件：</p>
+        
+        <div class="trip-container">
+            <div class="section">
+                <div class="trip">                                        
+                    <div class="left"><div class="ticket-title">去程</div> 03/20 </div>
+                    <div class="right">🚆621</div>
+                </div>
+                <div class="trip">
+                    <div class="left">
+                        <div class="trip-station">09:46 <br/>台北</div>
+                    </div>
+                    <div class="through">...................... ⏱1:28 ......................</div>
+                    <div class="right">
+                        <div class="trip-station">10:46<br/>台中</div>                        
+                    </div>
+                </div>
+                <div class="trip">
+                    <div class="left">
+                        <!-- 座位 -->
+                    </div>
+                    <div class="right">
+                        <span class="seat-box">4車7D</span>
+                        <span class="seat-box">4車7E</span>
+                    </div>
+                </div>
+                <div class="trip"><div class="left"><div class="details">詳細內容</div></div></div>
+                <div class="trip">
+                    <div class="left">全票 x1</div>
+                    <div class="right">700</div>
+                </div>
+                <div class="trip">
+                    <div class="left">小計</div>
+                    <div class="right">700</div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <!-- 註解的是沒有回程的呈現-->
+                <!-- <div class="trip">
+                    <div class="left"><div class="ticket-title">回程</div> (無)</div>
+                </div> -->
+                <div class="trip">                    
+                    <div class="left"><div class="ticket-title">回程</div> 03/31</div>
+                    <div class="right">🚆622</div>
+                </div>
+                <div class="trip">
+                    <div class="left">
+                        <div class="trip-station">10:32<br/>台中</div>
+                    </div>
+                    <div class="through">...................... ⏱1:28 ......................</div>
+                    <div class="right">
+                        <div class="trip-station">11:33<br/>台北</div>                        
+                    </div>
+                </div>
+                <div class="trip">
+                    <div class="left">
+                        <!-- 座位 -->
+                    </div>
+                    <div class="right">
+                        <span class="seat-box">5車2D</span>
+                        <span class="seat-box">5車2E</span>
+                    </div>
+                </div>
+            
+                <div class="trip"><div class="left"><div class="details">詳細內容</div></div></div>
+                <div class="trip">
+                    <div class="left">全票 x1</div>
+                    <div class="right">700</div>
+                </div>
+                <div class="trip">
+                    <div class="left">小計</div>
+                    <div class="right">700</div>
+                </div>
+            </div>
+        </div>
+        
+        <p class="details">車廂：標準車廂</p>
+        <p class="details">票數：全票 2 張</p>
+        <div class="price">總票價：TWD 1,400</div>
+    </div>
+</body>
+</html>

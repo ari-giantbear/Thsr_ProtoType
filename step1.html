@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高鐵聯票</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>高鐵聯票</h2>
+        <div class="ticket-form">
+            <div class="station-selection">
+                <label>出發站
+                    <select id="departure">
+                        <option value="">請選擇...</option>
+                        <option value="taipei">台北</option>
+                        <option value="taichung">台中</option>
+                        <option value="kaohsiung">高雄</option>
+                    </select>
+                </label>
+                <span class="exchange">⇆</span>
+                <label>抵達站
+                    <select id="arrival">
+                        <option value="">請選擇...</option>
+                        <option value="taipei">台北</option>
+                        <option value="taichung">台中</option>
+                        <option value="kaohsiung">高雄</option>
+                    </select>
+                </label>
+            </div>
+            <span class="exchange"></span>
+            <div class="ticket-types">
+                <label>出發日期
+                    <input type="date" id="departure-date">
+                </label>
+                <label>出發時間
+                    <input type="time" id="departure-date">
+                </label>
+                <label>回程日期
+                    <input type="date" id="return-date">
+                </label>
+                <label>回程時間
+                    <input type="time" id="return-date">
+                </label>
+            </div>
+            <div class="ticket-types">
+                <label>全票
+                    <input type="number" id="adult-ticket" min="0" value="1">
+                </label>
+                <label>孩童票 (6-11)
+                    <input type="number" id="child-ticket" min="0" value="0">
+                </label>
+                <label>愛心票
+                    <input type="number" id="concession-ticket" min="0" value="0">
+                </label>
+                <label>敬老票 (65+)
+                    <input type="number" id="senior-ticket" min="0" value="0">
+                </label>
+            </div>
+            <button id="search-btn" onclick="window.location='step2.html'">開始查詢</button>
+        </div>
+    </div>
+    <!-- <script src="script.js"></script> -->
+</body>
+</html>
+
