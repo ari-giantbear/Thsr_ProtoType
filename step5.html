@@ -126,7 +126,28 @@
         .through {
             color: rgba(164, 165, 214, 0.622);
             font-size: 14px;
-        }        
+            position: relative;
+            padding: 0 35px;
+        }
+        
+        .through::before,
+        .through::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 30px;
+            height: 1px;
+            background-color: #ddd;
+        }
+        
+        .through::before {
+            left: 0;
+        }
+        
+        .through::after {
+            right: 0;
+        }
+        
         @media (max-width: 768px) {
             .trip-container {
                 flex-direction: column;
@@ -179,7 +200,7 @@
                     <div class="left">
                         <div class="trip-station">09:46 <br/>台北</div>
                     </div>
-                    <div class="through">............... ⏱1:28 ...............</div>
+                    <div class="through">⏱1:28</div>
                     <div class="right">
                         <div class="trip-station">10:46<br/>台中</div>                        
                     </div>
@@ -217,7 +238,7 @@
                     <div class="left">
                         <div class="trip-station">10:32<br/>台中</div>
                     </div>
-                    <div class="through">............... ⏱1:28 ...............</div>
+                    <div class="through">⏱1:28</div>
                     <div class="right">
                         <div class="trip-station">11:33<br/>台北</div>                        
                     </div>
