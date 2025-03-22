@@ -5,63 +5,240 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>高鐵聯票</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
     <div class="container">
-        <h2>高鐵聯票</h2>
+        <div class="header-options">
+            <div class="left-options">
+                <div class="dropdown">
+                    <button class="dropdown-btn" onclick="toggleDropdown(this)">去程 <i class="fas fa-chevron-down"></i></button>
+                    <div class="dropdown-content">
+                        <a href="#" onclick="selectOption(this, '去程')">去程</a>
+                        <a href="#" onclick="selectOption(this, '去回程')">去回程</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropdown-btn" onclick="toggleDropdown(this)">標準車廂 <i class="fas fa-chevron-down"></i></button>
+                    <div class="dropdown-content">
+                        <a href="#" onclick="selectOption(this, '標準車廂')">標準車廂</a>
+                        <a href="#" onclick="selectOption(this, '商務車廂')">商務車廂</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="ticket-form">
-            <div class="station-selection">
-                <label>出發站
-                    <select id="departure">
-                        <option value="">請選擇...</option>
-                        <option value="taipei">台北</option>
-                        <option value="taichung">台中</option>
-                        <option value="kaohsiung">高雄</option>
-                    </select>
-                </label>
-                <span class="exchange">⇆</span>
-                <label>抵達站
-                    <select id="arrival">
-                        <option value="">請選擇...</option>
-                        <option value="taipei">台北</option>
-                        <option value="taichung">台中</option>
-                        <option value="kaohsiung">高雄</option>
-                    </select>
-                </label>
+            <div class="journey-selection">
+                <div class="station-group">
+                    <div class="station-input">
+                        <i class="fas fa-map-marker-alt orange-icon"></i>
+                        <div class="input-wrapper">
+                            <label>出發站</label>
+                            <select>
+                                <option value="">請選擇...</option>
+                                <option value="nangang">南港</option>
+                                <option value="taipei">台北</option>
+                                <option value="banqiao">板橋</option>
+                                <option value="taoyuan">桃園</option>
+                                <option value="hsinchu">新竹</option>
+                                <option value="miaoli">苗栗</option>
+                                <option value="taichung">台中</option>
+                                <option value="changhua">彰化</option>
+                                <option value="yunlin">雲林</option>
+                                <option value="chiayi">嘉義</option>
+                                <option value="tainan">台南</option>
+                                <option value="zuoying">左營</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="exchange-icon">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <div class="station-input">
+                        <i class="fas fa-map-marker-alt orange-icon"></i>
+                        <div class="input-wrapper">
+                            <label>抵達站</label>
+                            <select>
+                                <option value="">請選擇...</option>
+                                <option value="nangang">南港</option>
+                                <option value="taipei">台北</option>
+                                <option value="banqiao">板橋</option>
+                                <option value="taoyuan">桃園</option>
+                                <option value="hsinchu">新竹</option>
+                                <option value="miaoli">苗栗</option>
+                                <option value="taichung">台中</option>
+                                <option value="changhua">彰化</option>
+                                <option value="yunlin">雲林</option>
+                                <option value="chiayi">嘉義</option>
+                                <option value="tainan">台南</option>
+                                <option value="zuoying">左營</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="date-time-group">
+                    <div class="date-time-input">
+                        <i class="far fa-calendar orange-icon"></i>
+                        <div class="input-wrapper">
+                            <label>出發日期</label>
+                            <input type="date" class="date-input" id="deptDate">
+                        </div>
+                    </div>
+                    <div class="date-time-input">
+                        <i class="far fa-clock orange-icon"></i>
+                        <div class="input-wrapper">
+                            <label>出發時間</label>
+                            <input type="time" class="time-input" id="deptTime" step="600">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="date-time-group" id="returnGroup">
+                    <div class="date-time-input">
+                        <i class="far fa-calendar orange-icon"></i>
+                        <div class="input-wrapper">
+                            <label>回程日期</label>
+                            <input type="date" class="date-input" id="returnDate">
+                        </div>
+                    </div>
+                    <div class="date-time-input">
+                        <i class="far fa-clock orange-icon"></i>
+                        <div class="input-wrapper">
+                            <label>回程時間</label>
+                            <input type="time" class="time-input" id="returnTime" step="600">
+                        </div>
+                    </div>
+                </div>
             </div>
-            <span class="exchange"></span>
+
             <div class="ticket-types">
-                <label>出發日期
-                    <input type="date" id="departure-date">
-                </label>
-                <label>出發時間
-                    <input type="time" id="departure-date">
-                </label>
-                <label>回程日期
-                    <input type="date" id="return-date">
-                </label>
-                <label>回程時間
-                    <input type="time" id="return-date">
-                </label>
+                <div class="ticket-counter">
+                    <label>全票</label>
+                    <div class="counter-input">
+                        <button class="minus-btn" onclick="decreaseCount(this)">-</button>
+                        <input type="number" value="1" min="0" max="9" readonly>
+                        <button class="plus-btn" onclick="increaseCount(this)">+</button>
+                    </div>
+                </div>
+                <div class="ticket-counter">
+                    <label>孩童票(6-11)</label>
+                    <div class="counter-input">
+                        <button class="minus-btn" onclick="decreaseCount(this)">-</button>
+                        <input type="number" value="0" min="0" max="9" readonly>
+                        <button class="plus-btn" onclick="increaseCount(this)">+</button>
+                    </div>
+                </div>
+                <div class="ticket-counter">
+                    <label>愛心票</label>
+                    <div class="counter-input">
+                        <button class="minus-btn" onclick="decreaseCount(this)">-</button>
+                        <input type="number" value="0" min="0" max="9" readonly>
+                        <button class="plus-btn" onclick="increaseCount(this)">+</button>
+                    </div>
+                </div>
+                <div class="ticket-counter">
+                    <label>敬老票(65+)</label>
+                    <div class="counter-input">
+                        <button class="minus-btn" onclick="decreaseCount(this)">-</button>
+                        <input type="number" value="0" min="0" max="9" readonly>
+                        <button class="plus-btn" onclick="increaseCount(this)">+</button>
+                    </div>
+                </div>
             </div>
-            <div class="ticket-types">
-                <label>全票
-                    <input type="number" id="adult-ticket" min="0" value="1">
-                </label>
-                <label>孩童票 (6-11)
-                    <input type="number" id="child-ticket" min="0" value="0">
-                </label>
-                <label>愛心票
-                    <input type="number" id="concession-ticket" min="0" value="0">
-                </label>
-                <label>敬老票 (65+)
-                    <input type="number" id="senior-ticket" min="0" value="0">
-                </label>
-            </div>
-            <button id="search-btn" onclick="window.location='step2.html'">開始查詢</button>
+
+            <button class="search-btn">開始查詢</button>
         </div>
     </div>
-    <!-- <script src="script.js"></script> -->
+    <script>
+        function decreaseCount(button) {
+            const input = button.nextElementSibling;
+            let value = parseInt(input.value);
+            if (value > 0) {
+                input.value = value - 1;
+            }
+            updateButtonStates(button.parentElement);
+        }
+
+        function increaseCount(button) {
+            const input = button.previousElementSibling;
+            let value = parseInt(input.value);
+            if (value < 9) {
+                input.value = value + 1;
+            }
+            updateButtonStates(button.parentElement);
+        }
+
+        function updateButtonStates(counterInput) {
+            const minusBtn = counterInput.querySelector('.minus-btn');
+            const plusBtn = counterInput.querySelector('.plus-btn');
+            const input = counterInput.querySelector('input');
+            const value = parseInt(input.value);
+
+            minusBtn.disabled = value <= 0;
+            plusBtn.disabled = value >= 9;
+        }
+
+        function toggleDropdown(button) {
+            const dropdown = button.nextElementSibling;
+            // 關閉其他所有下拉選單
+            document.querySelectorAll('.dropdown-content').forEach(content => {
+                if (content !== dropdown) {
+                    content.classList.remove('show');
+                }
+            });
+            // 切換當前下拉選單
+            dropdown.classList.toggle('show');
+        }
+
+        function selectOption(link, value) {
+            const button = link.parentElement.previousElementSibling;
+            button.textContent = value;
+            button.innerHTML = value + ' <i class="fas fa-chevron-down"></i>';
+            link.parentElement.classList.remove('show');
+
+            // 控制回程欄位的顯示
+            const returnGroup = document.getElementById('returnGroup');
+            if (button.textContent.includes('去程')) {
+                if (value === '去程') {
+                    returnGroup.style.display = 'none';
+                    // 清空回程的值
+                    document.getElementById('returnDate').value = '';
+                    document.getElementById('returnTime').value = '';
+                } else if (value === '去回程') {
+                    returnGroup.style.display = 'flex';
+                }
+            }
+        }
+
+        // 點擊其他地方時關閉下拉選單
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropdown-btn') && !event.target.matches('.fa-chevron-down')) {
+                document.querySelectorAll('.dropdown-content').forEach(content => {
+                    content.classList.remove('show');
+                });
+            }
+        }
+
+        // 初始化頁面狀態
+        document.addEventListener('DOMContentLoaded', function() {
+            // 初始化計數器按鈕狀態
+            document.querySelectorAll('.counter-input').forEach(updateButtonStates);
+            
+            // 初始化回程欄位顯示狀態
+            const journeyTypeBtn = document.querySelector('.dropdown-btn');
+            const returnGroup = document.getElementById('returnGroup');
+            if (journeyTypeBtn.textContent.trim() === '去程') {
+                returnGroup.style.display = 'none';
+                // 清空回程的值
+                document.getElementById('returnDate').value = '';
+                document.getElementById('returnTime').value = '';
+            } else {
+                returnGroup.style.display = 'flex';
+            }
+        });
+    </script>
 </body>
 </html>
 
