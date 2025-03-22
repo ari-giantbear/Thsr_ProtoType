@@ -79,17 +79,12 @@ body {
     min-width: 120px;
     text-align: left;
     position: relative;
-    padding: 8px 24px 8px 12px;
+    padding-right: 24px;
     background: none;
     border: none;
-    font-size: 16px;
     color: #333;
     cursor: pointer;
-    transition: color 0.2s;
-}
-
-.dropdown-btn:hover {
-    color: #f60;
+    font-size: 14px;
 }
 
 .dropdown-btn i {
@@ -97,12 +92,6 @@ body {
     right: 8px;
     top: 50%;
     transform: translateY(-50%);
-    color: #666;
-    transition: color 0.2s;
-}
-
-.dropdown-btn:hover i {
-    color: #f60;
 }
 
 .search-type {
@@ -304,10 +293,113 @@ body {
     font-size: 18px;
     cursor: pointer;
     transition: background-color 0.2s;
+    text-decoration: none;
+    display: block;
+    text-align: center;
 }
 
 .search-btn:hover {
     background-color: #ff7519;
+}
+
+/* Step Navigation */
+.step-nav {
+    background: #fff;
+    padding: 20px 0;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #e0e0e0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.step-list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+}
+
+.step-list::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #e0e0e0;
+    z-index: 1;
+}
+
+.step {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    transition: all 0.3s ease;
+}
+
+.step-number {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid #999;
+    color: #999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.step-text {
+    font-size: 14px;
+    color: #999;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+/* Active State */
+.step.active .step-number {
+    background: #f60;
+    border-color: #f60;
+    color: #fff;
+    transform: scale(1.1);
+}
+
+.step.active .step-text {
+    color: #f60;
+    font-weight: 600;
+}
+
+/* Completed State */
+.step.completed .step-number {
+    background: #f60;
+    border-color: #f60;
+    color: #fff;
+}
+
+.step.completed .step-text {
+    color: #f60;
+}
+
+/* Hover Effect */
+.step:hover .step-number {
+    border-color: #f60;
+    transform: scale(1.05);
+}
+
+.step:hover .step-text {
+    color: #f60;
 }
 
 /* Responsive Design */
@@ -344,6 +436,24 @@ body {
     .ticket-counter {
         flex: 1 1 100%;
     }
+
+    .step-nav {
+        padding: 15px 0;
+    }
+
+    .step-list {
+        padding: 0 15px;
+    }
+
+    .step-number {
+        width: 32px;
+        height: 32px;
+        font-size: 14px;
+    }
+
+    .step-text {
+        font-size: 12px;
+    } 
 }
 
 @media (max-width: 480px) {
@@ -356,6 +466,21 @@ body {
     .left-options {
         flex-direction: column;
     }
+
+    .step-nav {
+        padding: 10px 0;
+    }
+
+    .step-text {
+        display: none;
+    }
+
+    .step-number {
+        width: 28px;
+        height: 28px;
+        font-size: 12px;
+    }
+        
 }
 
 .input-wrapper input[type="date"],

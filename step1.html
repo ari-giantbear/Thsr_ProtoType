@@ -148,7 +148,7 @@
                 </div>
             </div>
 
-            <button class="search-btn">開始查詢</button>
+            <a href="step2.html" class="search-btn">開始查詢</a>
         </div>
     </div>
     <script>
@@ -200,7 +200,7 @@
 
             // 控制回程欄位的顯示
             const returnGroup = document.getElementById('returnGroup');
-            if (button.textContent.includes('去程')) {
+            if (button.textContent.includes('去程') || button.textContent.includes('去回程')) {
                 if (value === '去程') {
                     returnGroup.style.display = 'none';
                     // 清空回程的值
