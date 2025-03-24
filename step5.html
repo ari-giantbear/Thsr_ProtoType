@@ -11,20 +11,6 @@
     <link rel="stylesheet" href="styles.css?v=1.0.0">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f8f8;
-            /*margin: 0;*/
-            /*padding: 20px;*/
-        }
-        .container {
-            max-width: 800px;
-            background: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin: auto;
-        }
         .header {
             display: flex;
             justify-content: space-between;
@@ -32,47 +18,17 @@
             border-bottom: 2px solid #ddd;
             padding-bottom: 10px;
         }
-        .order-id {
-            font-size: 18px;
+        .pnr-label {
+            font-size: 14px;
             color: #333;
         }
-        .paid {
+
+        .pnr {
+            font-size: 18px;
             color: red;
             font-weight: bold;
         }
-        .trip-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            gap: 10px;
-        }
-        .section {
-            flex: 1;
-            min-width: 280px;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            background: #fdfdfd;
-        }
-        .trip {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 5px 0;
-        }
-        .trip .left {
-            text-align: left;
-            font-weight: bold;
-        }
-        .trip-station {
-            font-weight: bold;
-            font-size: 20px;
-        }
 
-        .trip .right {
-            text-align: right;
-            font-weight: bold;
-        }
         .details {
             font-size: 14px;
             color: #666;
@@ -105,13 +61,6 @@
             margin-top: 10px;
             line-height: 1.5;
         }
-        .ticket-title {
-            background: #333;
-            color: white;
-            padding: 2px 6px;
-            border-radius: 3px;
-            display: inline-block;
-        }
         .seat-box {
             display: inline-block;
             padding: 2px 6px;
@@ -122,34 +71,6 @@
             font-size: 14px;
             font-weight:normal;
         }        
-        .details-link {
-            color: rgba(91, 92, 165, 0.622);
-            font-size: 12px;
-        }        
-        .through {
-            color: rgba(164, 165, 214, 0.622);
-            font-size: 14px;
-            position: relative;
-            padding: 0 35px;
-        }
-        
-        .through::before,
-        .through::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            width: 30px;
-            height: 1px;
-            background-color: #ddd;
-        }
-        
-        .through::before {
-            left: 0;
-        }
-        
-        .through::after {
-            right: 0;
-        }
         
         @media (max-width: 768px) {
             .trip-container {
