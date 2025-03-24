@@ -30,7 +30,7 @@
             margin-bottom: 20px;
         }
         .summary,
-        .container .detail {
+        .container .ticket-detail {
             display: flex;
             justify-content: space-between;
             margin-bottom: 10px;
@@ -44,7 +44,7 @@
             font-weight: bold;
             margin-bottom: 15px;
         }
-        .ticket-box {
+        .ticket-area {
             display: flex;
             justify-content: space-between;
             gap: 15px;
@@ -55,18 +55,65 @@
             padding: 15px;
             border-radius: 5px;
         }
+        .ticket-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .ticket-row .left {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+        .ticket-row .right {
+            display: flex;
+            flex-direction: column;
+            text-align: right;
+        }
+        .through {
+            color: rgba(164, 165, 214, 0.622);
+            font-size: 14px;
+            position: relative;
+            padding: 0 35px;
+        }
+        
+        .through::before,
+        .through::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 30px;
+            height: 1px;
+            background-color: #ddd;
+        }
+        
+        .through::before {
+            left: 0;
+        }
+        
+        .through::after {
+            right: 0;
+        }
+
         .ticket-way {
             background: #333;
             color: white;
-            padding: 5px 10px;
+            padding: 2px;
             border-radius: 3px;
             display: inline-block;
         }
-        .ticket-info {
+        .ticket-date {
+            margin-left: 3px;
+            font-size: 14px;
+            font-weight:normal;
+            display: flex;
+            align-items: center;
+        }
+        .ticket-train-no {
             margin-top: 10px;
             font-size: 14px;
         }
-        .ticket-time-box {
+        .ticket-time-station {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -221,16 +268,24 @@
 
     <div class="container">
         <div class="title">訂位明細</div>
-        <div class="ticket-box">
+        <div class="ticket-area">
             <div class="ticket">
-                <div class="ticket-way">去程</div>
-                <div class="ticket-info">03/20  |  🚆 621</div>
-                <div class="ticket-time-box">
-                    <div>
+                <div class="ticket-row">
+                    <div class="left">
+                        <div class="ticket-way">去程</div>
+                        <div class="ticket-date">03/20</div>
+                    </div>
+                    <div class="right">
+                        <div class="ticket-train-no">🚆 621</div>                    
+                    </div>
+                </div>
+                <div class="ticket-row">
+                    <div class="left">
                         <div id="dept-start" class="ticket-time">09:46</div>
                         <div class="station">台北</div>
                     </div>
-                    <div>
+                    <div class="through">⏱1:28</div>
+                    <div class="right">
                         <div id="dept-end" class="ticket-time">10:46</div>
                         <div class="station">台中</div>
                     </div>
@@ -238,8 +293,8 @@
             </div>
             <div class="ticket">
                 <div class="ticket-way">回程</div>
-                <div class="ticket-info">03/31  |  🚆 622</div>
-                <div class="ticket-time-box">
+                <div class="ticket-date">03/31</div><div class="ticket-train-no">  |  🚆 622</div>
+                <div class="ticket-time-station">
                     <div>
                         <div id="return-start" class="ticket-time">10:32</div>
                         <div class="station">台中</div>
@@ -252,11 +307,11 @@
             </div>
         </div>
 
-        <div class="detail">
+        <div class="ticket-detail">
             <span>車廂：</span>
             <span>標準車廂</span>
         </div>
-        <div class="detail">
+        <div class="ticket-detail">
             <span>票數：</span>
             <span>全票 2 張</span>
         </div>
