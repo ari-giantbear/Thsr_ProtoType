@@ -185,30 +185,37 @@
     </div>
     <div class="container">
         <div class="header">
-            <div class="order-id">去程訂位代號：05131244</div>
-            <div class="order-id">回程訂位代號：05134542</div>
-            <div class="paid">完成付款</div>
+            <div class="pnr-label">去程訂位代號：<span class="pnr">05131244</span></div>
+            <div class="pnr-label">回程訂位代號：<span class="pnr">05134542</span></div>
+            <div>完成繳款</div>
         </div>
         <p class="details">取票識別碼：Y12*****60</p>
         <p class="details">聯絡電話：0930***0328</p>
         <p class="details">電子郵件：</p>
-        
-        <div class="trip-container">
-            <div class="section">
-                <div class="trip">                                        
-                    <div class="left"><div class="ticket-title">去程</div> 03/20 </div>
-                    <div class="right">🚆621</div>
-                </div>
-                <div class="trip">
+
+        <div class="ticket-area">
+            <div class="ticket">
+                <div class="ticket-row">
                     <div class="left">
-                        <div class="trip-station">09:46 <br/>台北</div>
+                        <div class="ticket-way">去程</div>
+                        <div class="ticket-date">03/20</div>
+                    </div>
+                    <div class="right">
+                        <div class="right">🚆621</div>
+                    </div>
+                </div>
+                <div class="ticket-row">
+                    <div class="left flex-column">
+                        <div class="ticket-time">09:46</div>
+                        <div class="station">台北</div>
                     </div>
                     <div class="through">⏱1:28</div>
-                    <div class="right">
-                        <div class="trip-station">10:46<br/>台中</div>                        
+                    <div class="right flex-column">
+                        <div class="ticket-time">10:46</div>
+                        <div class="station">台中</div>
                     </div>
                 </div>
-                <div class="trip">
+                <div class="ticket-row">
                     <div class="left">
                         <!-- 座位 -->
                     </div>
@@ -217,36 +224,45 @@
                         <span class="seat-box">4車7E</span>
                     </div>
                 </div>
-                <div class="trip"><div class="left"><div class="details">詳細內容</div></div></div>
-                <div class="trip">
+                <div class="ticket-row">
+                    <div class="left">
+                        <div class="details">詳細內容</div>
+                    </div>
+                </div>
+                <div class="ticket-row">
                     <div class="left">全票 x1</div>
                     <div class="right">700</div>
                 </div>
-                <div class="trip">
+                <div class="ticket-row">
                     <div class="left">小計</div>
                     <div class="right">700</div>
                 </div>
             </div>
-            
-            <div class="section">
+
+            <div class="ticket">
                 <!-- 註解的是沒有回程的呈現-->
-                <!-- <div class="trip">
+                <!-- <div class="ticket-row">
                     <div class="left"><div class="ticket-title">回程</div> (無)</div>
                 </div> -->
-                <div class="trip">                    
-                    <div class="left"><div class="ticket-title">回程</div> 03/31</div>
+                <div class="ticket-row">
+                    <div class="left">
+                        <div class="ticket-way">回程</div>
+                        <div class="ticket-date">03/21</div>
+                    </div>
                     <div class="right">🚆622</div>
                 </div>
-                <div class="trip">
-                    <div class="left">
-                        <div class="trip-station">10:32<br/>台中</div>
+                <div class="ticket-row">
+                    <div class="left flex-column">
+                        <div class="ticket-time">10:32</div>
+                        <div class="station">台中</div>
                     </div>
                     <div class="through">⏱1:28</div>
-                    <div class="right">
-                        <div class="trip-station">11:33<br/>台北</div>                        
+                    <div class="right flex-column">
+                        <div class="ticket-time">11:33</div>
+                        <div class="station">台北</div>
                     </div>
                 </div>
-                <div class="trip">
+                <div class="ticket-row">
                     <div class="left">
                         <!-- 座位 -->
                     </div>
@@ -255,19 +271,23 @@
                         <span class="seat-box">5車2E</span>
                     </div>
                 </div>
-            
-                <div class="trip"><div class="left"><div class="details">詳細內容</div></div></div>
-                <div class="trip">
+
+                <div class="ticket-row">
+                    <div class="left">
+                        <div class="details">詳細內容</div>
+                    </div>
+                </div>
+                <div class="ticket-row">
                     <div class="left">全票 x1</div>
                     <div class="right">700</div>
                 </div>
-                <div class="trip">
+                <div class="ticket-row">
                     <div class="left">小計</div>
                     <div class="right">700</div>
                 </div>
             </div>
         </div>
-        
+
         <p class="details">車廂：標準車廂</p>
         <p class="details">票數：全票 2 張</p>
         <div class="price">總票價：TWD 1,400</div>

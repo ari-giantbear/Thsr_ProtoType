@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="styles.css?v=1.1.0">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-
         .header {
             display: flex;
             justify-content: space-between;
@@ -21,53 +20,20 @@
             padding-bottom: 10px;
         }
 
-        .order-id {
-            font-size: 24px;
-            font-weight: bold;
+        .pnr-label {
+            font-size: 14px;
             color: #333;
         }
 
-        .unpaid {
+        .pnr {
+            font-size: 18px;
             color: red;
-            font-weight: bold;
-        }
-
-        .ticket-area {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            gap: 10px;
-        }
-
-        .ticket {
-            flex: 1;
-            min-width: 280px;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            background: #fdfdfd;
-        }
-
-        .ticket-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 5px 0;
-        }
-
-        .ticket-row .left {
-            text-align: left;
             font-weight: bold;
         }
 
         .trip-station {
             font-weight: bold;
             font-size: 20px;
-        }
-
-        .ticket-row .right {
-            text-align: right;
-            font-weight: bold;
         }
 
         .details {
@@ -188,8 +154,8 @@
     </div>
     <div class="container">
         <div class="header">
-            <div class="order-id">去程訂位代號：<span class="unpaid">05131244</span></div>
-            <div class="order-id">回程訂位代號：<span class="unpaid">05134542</span></div>
+            <div class="pnr-label">去程訂位代號：<span class="pnr">05131244</span></div>
+            <div class="pnr-label">回程訂位代號：<span class="pnr">05134542</span></div>
             <div>付款期限：03/19</div>
         </div>
         <p class="details">取票識別碼：Y12*****60</p>
@@ -208,12 +174,14 @@
                     </div>
                 </div>
                 <div class="ticket-row">
-                    <div class="left">
-                        <div class="station">09:46 <br />台北</div>
+                    <div class="left flex-column">
+                        <div class="ticket-time">09:46</div>
+                        <div class="station">台北</div>
                     </div>
                     <div class="through">⏱1:28</div>
-                    <div class="right">
-                        <div class="station">10:46<br />台中</div>
+                    <div class="right flex-column">
+                        <div class="ticket-time">10:46</div>
+                        <div class="station">台中</div>
                     </div>
                 </div>
                 <div class="ticket-row">
@@ -247,17 +215,20 @@
                 </div> -->
                 <div class="ticket-row">
                     <div class="left">
-                        <div class="ticket-way">回程</div> 03/31
+                        <div class="ticket-way">回程</div>
+                        <div class="ticket-date">03/21</div>
                     </div>
                     <div class="right">🚆622</div>
                 </div>
                 <div class="ticket-row">
-                    <div class="left">
-                        <div class="station">10:32<br />台中</div>
+                    <div class="left flex-column">
+                        <div class="ticket-time">10:32</div>
+                        <div class="station">台中</div>
                     </div>
                     <div class="through">⏱1:28</div>
-                    <div class="right">
-                        <div class="station">11:33<br />台北</div>
+                    <div class="right flex-column">
+                        <div class="ticket-time">11:33</div>
+                        <div class="station">台北</div>
                     </div>
                 </div>
                 <div class="ticket-row">
