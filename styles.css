@@ -580,11 +580,7 @@ body {
     }
 
     .step-nav {
-        padding: 4px 0;
-    }
-
-    .step-text {
-        display: none;
+        padding: 6px 4px;
     }
 
     .step-number {
@@ -592,7 +588,19 @@ body {
         height: 16px;
         font-size: 12px;
     }
-        
+
+    .step-text {
+        display: none;
+    }
+
+    .step.active .step-text {
+        display: block;
+    }
+
+    .step.completed .step-text {
+        display: none;
+    }
+
     .ticket-area {
         flex-direction: column;
     }
