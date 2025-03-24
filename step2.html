@@ -39,94 +39,8 @@
         }
 
 
-        .title {
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-        .ticket-area {
-            display: flex;
-            justify-content: space-between;
-            gap: 15px;
-        }
-        .ticket {
-            width: 48%;
-            background: #f5f5f5;
-            padding: 15px;
-            border-radius: 5px;
-        }
-        .ticket-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .ticket-row .left {
-            display: flex;
-            flex-direction: column;
-            text-align: left;
-        }
-        .ticket-row .right {
-            display: flex;
-            flex-direction: column;
-            text-align: right;
-        }
-        .through {
-            color: rgba(164, 165, 214, 0.622);
-            font-size: 14px;
-            position: relative;
-            padding: 0 35px;
-        }
-        
-        .through::before,
-        .through::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            width: 30px;
-            height: 1px;
-            background-color: #ddd;
-        }
-        
-        .through::before {
-            left: 0;
-        }
-        
-        .through::after {
-            right: 0;
-        }
 
-        .ticket-way {
-            background: #333;
-            color: white;
-            padding: 2px;
-            border-radius: 3px;
-            display: inline-block;
-        }
-        .ticket-date {
-            margin-left: 3px;
-            font-size: 14px;
-            font-weight:normal;
-            display: flex;
-            align-items: center;
-        }
-        .ticket-train-no {
-            margin-top: 10px;
-            font-size: 14px;
-        }
-        .ticket-time-station {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 10px;
-        }
-        .ticket-time {
-            font-size: 20px;
-            font-weight: bold;
-        }
-        .station {
-            font-size: 14px;
-            color: #666;
-        }
+
         .confirm-btn {
             display: block;
             width: 100%;
@@ -152,17 +66,30 @@
         }
 
     </style>
+
     <script>
         let departureIndex = 0;
         let returnIndex = 0;
-        let selectedDeparture = '';
-        let selectedReturn = '';
 
-        let selectedDeptStart = '';
-        let selectedDeptEnd = '';
-        let selectedReturnStart = '';
-        let selectedReturnEnd = '';
+        //去程所選擇的車次參數
+        let outwardDate = '';
+        let outwardTrainNo = '';
+        let outwardDeptTime = '';
+        let outwardDeptStation = '';
+        let outwardDuration = '';
+        let outwardDestTime = '';
+        let outwardDestStation = '';
+
+        //回程所選擇的車次參數  
+        let returnDate = '';
+        let returnTrainNo = '';
+        let returnDeptTime = '';
+        let returnDeptStation = '';
+        let returnDuration = '';
+        let returnDestTime = '';
+        let returnDestStation = '';
         
+        //所有車次資料，這是隨機產生的
         const trains = Array.from({ length: 20 }, (_, i) => ({
             startTime: `${12 + Math.floor(i / 2)}:${(30 + i * 3) % 60}`,
             endTime: `${13 + Math.floor(i / 2)}:${(33 + i * 3) % 60}`,
@@ -171,6 +98,7 @@
             trainNo: `🚆 ${600 + i}`
         }));
         
+        //渲染車次
         function renderTrains(type, index) {
             const container = document.querySelector(`.${type} .train-list`);
             container.innerHTML = '';
@@ -178,11 +106,12 @@
                 const div = document.createElement('div');
                 div.className = 'train-option';
                 div.onclick = () => selectTrain(div, type, train);
-                div.innerHTML = `<div class='ticket-time'>${train.time}</div><div class='duration'>${train.duration}</div><div class='train-no'>${train.trainNo}</div>`;
+                div.innerHTML = `<div class='ticket-time'>${train.time} </div> <div class='duration'>${train.duration}</div><div class='train-no'>${train.trainNo}</div>`;
                 container.appendChild(div);
             });
         }
         
+        //更換車次
         function changeTrains(type, direction) {
             if (type === 'departure') {
                 departureIndex = Math.max(0, Math.min(15, departureIndex + direction * 5));
@@ -192,29 +121,38 @@
                 renderTrains(type, returnIndex);
             }
         }
-        
+
+        //選擇車次
         function selectTrain(element, type, train) {
             document.querySelectorAll(`.${type} .train-option`).forEach(el => el.classList.remove('selected'));
             element.classList.add('selected');
             if (type === 'departure') {
-                selectedDeparture = train.time;
-                selectedDeptStart = train.startTime;
-                selectedDeptEnd = train.endTime;
+                outwardDeptTime = train.startTime;
+                outwardDestTime = train.endTime;
+                outwardDuration = train.duration;
+                outwardTrainNo = train.trainNo;
             } else {
-                selectedReturn = train.time;
-                selectedReturnStart = train.startTime;
-                selectedReturnEnd = train.endTime;
+                returnDeptTime = train.startTime;
+                returnDestTime = train.endTime;
+                returnDuration = train.duration;
+                returnTrainNo = train.trainNo;
             }
             updateSummary();
         }
         
+        //更新訂位明細(車票的內容)
         function updateSummary() {
-            document.getElementById("dept-start").textContent = selectedDeptStart || '00:00';
-            document.getElementById("dept-end").textContent = selectedDeptEnd || '00:00';
-            document.getElementById("return-start").textContent = selectedReturnStart || '00:00';
-            document.getElementById("return-end").textContent = selectedReturnEnd || '00:00';
+            document.getElementById("outward-train-no").textContent = outwardTrainNo;
+            document.getElementById("outward-dept-time").textContent = outwardDeptTime;
+            document.getElementById("outward-dest-time").textContent = outwardDestTime;
+            document.getElementById("outward-duration").textContent = outwardDuration;
+            document.getElementById("return-train-no").textContent = returnTrainNo;
+            document.getElementById("return-dept-time").textContent = returnDeptTime;
+            document.getElementById("return-dest-time").textContent = returnDestTime;
+            document.getElementById("return-duration").textContent = returnDuration;
         }
-        
+
+        //載入頁面時，渲染車次
         window.onload = function() {
             renderTrains('departure', departureIndex);
             renderTrains('return', returnIndex);
@@ -273,35 +211,44 @@
                 <div class="ticket-row">
                     <div class="left">
                         <div class="ticket-way">去程</div>
-                        <div class="ticket-date">03/20</div>
+                        <div id="outward-date"class="ticket-date">03/20</div>
                     </div>
                     <div class="right">
-                        <div class="ticket-train-no">🚆 621</div>                    
+                        <div id="outward-train-no" class="ticket-train-no">🚆 621</div>                    
                     </div>
                 </div>
                 <div class="ticket-row">
-                    <div class="left">
-                        <div id="dept-start" class="ticket-time">09:46</div>
-                        <div class="station">台北</div>
+                    <div class="left flex-column">
+                        <div id="outward-dept-time" class="ticket-time">09:46</div>
+                        <div id="outward-dept-station" class="station">台北</div>
                     </div>
-                    <div class="through">⏱1:28</div>
-                    <div class="right">
-                        <div id="dept-end" class="ticket-time">10:46</div>
-                        <div class="station">台中</div>
+                    <div id="outward-duration" class="through">⏱1:28</div>
+                    <div class="right flex-column">
+                        <div id="outward-dest-time" class="ticket-time">10:46</div>
+                        <div id="outward-dest-station" class="station">台中</div>
                     </div>
                 </div>
             </div>
+
             <div class="ticket">
-                <div class="ticket-way">回程</div>
-                <div class="ticket-date">03/31</div><div class="ticket-train-no">  |  🚆 622</div>
-                <div class="ticket-time-station">
-                    <div>
-                        <div id="return-start" class="ticket-time">10:32</div>
-                        <div class="station">台中</div>
+                <div class="ticket-row">
+                    <div class="left">
+                        <div class="ticket-way">回程</div>
+                        <div id="return-date"class="ticket-date">03/20</div>
                     </div>
-                    <div>
-                        <div id="return-end" class="ticket-time">11:33</div>
-                        <div class="station">台北</div>
+                    <div class="right">
+                        <div id="return-train-no" class="ticket-train-no">🚆 621</div>                    
+                    </div>
+                </div>
+                <div class="ticket-row">
+                    <div class="left flex-column">
+                        <div id="return-dept-time" class="ticket-time">09:46</div>
+                        <div id="return-dept-station" class="station">台中</div>
+                    </div>
+                    <div id="return-duration" class="through">⏱1:28</div>
+                    <div class="right flex-column">
+                        <div id="return-dest-time" class="ticket-time">10:46</div>
+                        <div id="return-dest-station" class="station">台北</div>
                     </div>
                 </div>
             </div>

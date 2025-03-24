@@ -94,55 +94,9 @@
         button:hover {
             background: #d95b1c;
         }
-        /**/
-        .title {
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-        .ticket-box {
-            display: flex;
-            justify-content: space-between;
-            gap: 15px;
-        }
-        .ticket {
-            width: 48%;
-            background: #f5f5f5;
-            padding: 15px;
-            border-radius: 5px;
-        }
-        .ticket-title {
-            background: #333;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 3px;
-            display: inline-block;
-        }
-        .info {
-            margin-top: 10px;
-            font-size: 14px;
-        }
-        .time-box {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 10px;
-        }
-        .time {
-            font-size: 20px;
-            font-weight: bold;
-        }
-        .station {
-            font-size: 14px;
-            color: #666;
-        }        
-        .detail {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            font-size: 14px;
-            color: #666;
-        }    </style>
+
+    </style>
+    
     <script>
         function toggleTgoInput() {
             var tgoInput = document.getElementById("tgoInputSection");
@@ -183,44 +137,62 @@
             </div>
         </div>
     </div>
+
     <div class="container">
         <div class="title">訂位明細</div>
-        <div class="ticket-box">
+        <div class="ticket-area">
             <div class="ticket">
-                <div class="ticket-title">去程</div>
-                <div class="info">03/20  |  🚆 621</div>
-                <div class="time-box">
-                    <div>
-                        <div id="dept-start" class="time">09:46</div>
-                        <div class="station">台北</div>
+                <div class="ticket-row">
+                    <div class="left">
+                        <div class="ticket-way">去程</div>
+                        <div id="outward-date"class="ticket-date">03/20</div>
                     </div>
-                    <div>
-                        <div id="dept-end" class="time">10:46</div>
-                        <div class="station">台中</div>
+                    <div class="right">
+                        <div id="outward-train-no" class="ticket-train-no">🚆 621</div>                    
+                    </div>
+                </div>
+                <div class="ticket-row">
+                    <div class="left flex-column">
+                        <div id="outward-dept-time" class="ticket-time">09:46</div>
+                        <div id="outward-dept-station" class="station">台北</div>
+                    </div>
+                    <div id="outward-duration" class="through">⏱1:28</div>
+                    <div class="right flex-column">
+                        <div id="outward-dest-time" class="ticket-time">10:46</div>
+                        <div id="outward-dest-station" class="station">台中</div>
                     </div>
                 </div>
             </div>
+
             <div class="ticket">
-                <div class="ticket-title">回程</div>
-                <div class="info">03/31  |  🚆 622</div>
-                <div class="time-box">
-                    <div>
-                        <div id="return-start" class="time">10:32</div>
-                        <div class="station">台中</div>
+                <div class="ticket-row">
+                    <div class="left">
+                        <div class="ticket-way">回程</div>
+                        <div id="return-date"class="ticket-date">03/20</div>
                     </div>
-                    <div>
-                        <div id="return-end" class="time">11:33</div>
-                        <div class="station">台北</div>
+                    <div class="right">
+                        <div id="return-train-no" class="ticket-train-no">🚆 621</div>                    
+                    </div>
+                </div>
+                <div class="ticket-row">
+                    <div class="left flex-column">
+                        <div id="return-dept-time" class="ticket-time">09:46</div>
+                        <div id="return-dept-station" class="station">台中</div>
+                    </div>
+                    <div id="return-duration" class="through">⏱1:28</div>
+                    <div class="right flex-column">
+                        <div id="return-dest-time" class="ticket-time">10:46</div>
+                        <div id="return-dest-station" class="station">台北</div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="detail">
+        <div class="ticket-detail">
             <span>車廂：</span>
             <span>標準車廂</span>
         </div>
-        <div class="detail">
+        <div class="ticket-detail">
             <span>票數：</span>
             <span>全票 2 張</span>
         </div>

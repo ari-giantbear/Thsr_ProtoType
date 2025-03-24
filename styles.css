@@ -387,6 +387,126 @@ body {
     color: #333;
 }
 
+
+.container .ticket-detail {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #666;
+}
+
+/*標題*/
+.title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/*車次列表*/
+.ticket-area {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+/*車票*/
+.ticket {
+    width: 48%;
+    background: #f5f5f5;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+/*車票的內容(其中一行)*/
+.ticket-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/*車票的內容(其中一行)的左邊*/
+.ticket-row .left {
+    display: flex;
+    text-align: left;
+}
+
+/*車票的內容(其中一行)的右邊*/
+.ticket-row .right {
+    display: flex;
+    text-align: right;
+}
+
+/*車票的內容(其中一行)的左邊的子元素(flex-column)*/
+.flex-column {
+    flex-direction: column;
+}
+
+/*車票的內容(其中一行)的經過時間*/
+.through {
+    color: rgba(164, 165, 214, 0.622);
+    font-size: 14px;
+    position: relative;
+    padding: 0 35px;
+}
+
+/*車票的內容(其中一行)的經過時間的before和after*/
+.through::before,
+.through::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 30px;
+    height: 1px;
+    background-color: #ddd;
+}
+
+.through::before {
+    left: 0;
+}
+
+.through::after {
+    right: 0;
+}
+
+.ticket-way {
+    background: #333;
+    color: white;
+    padding: 2px;
+    border-radius: 3px;
+    display: inline-block;
+}
+
+.ticket-date {
+    margin-left: 3px;
+    font-size: 14px;
+    font-weight: normal;
+    display: flex;
+    align-items: center;
+}
+
+.ticket-train-no {
+    font-size: 14px;
+}
+
+.ticket-time-station {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.ticket-time {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.station {
+    font-size: 14px;
+    color: #666;
+}
+
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .header-options {
