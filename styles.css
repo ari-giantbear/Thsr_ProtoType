@@ -586,6 +586,14 @@ body {
         font-size: 12px;
     }
         
+    @media (max-width: 768px) {
+        .ticket-area {
+            flex-direction: column;
+        }
+        .ticket {
+            width: 100%;
+        }
+    }
 }
 
 .input-wrapper input[type="date"],
