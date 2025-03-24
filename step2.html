@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
+
 <head>
-    
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
@@ -16,10 +17,12 @@
             justify-content: space-between;
             margin-top: 10px;
         }
+
         .navigation a {
             color: #007bff;
             cursor: pointer;
         }
+
         .summary {
             max-width: 600px;
             margin: auto;
@@ -29,6 +32,7 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             margin-bottom: 20px;
         }
+
         .summary,
         .container .ticket-detail {
             display: flex;
@@ -38,33 +42,19 @@
             color: #666;
         }
 
-
-
-
-        .confirm-btn {
-            display: block;
-            width: 100%;
-            background: #e65100;
-            color: white;
-            border: none;
-            padding: 10px;
-            border-radius: 5px;
-            font-size: 16px;
-            margin-top: 20px;
-            cursor: pointer;
-        }      
+  
 
         .notice {
-            margin-top: 20px;
-            padding: 10px;
+            padding-left: 20px;
+            padding-right: 20px;
             background: #f9f9f9;
-            border-left: 4px solid #ff9800;
+            /*border-left: 4px solid #ff9800;*/
         }
+
         .notice-title {
             font-weight: bold;
             margin-bottom: 5px;
         }
-
     </style>
 
     <script>
@@ -88,7 +78,7 @@
         let returnDuration = '';
         let returnDestTime = '';
         let returnDestStation = '';
-        
+
         //所有車次資料，這是隨機產生的
         const trains = Array.from({ length: 20 }, (_, i) => ({
             startTime: `${12 + Math.floor(i / 2)}:${(30 + i * 3) % 60}`,
@@ -97,7 +87,7 @@
             duration: `⏱ 1:${(i % 3) + 1}`,
             trainNo: `🚆 ${600 + i}`
         }));
-        
+
         //渲染車次
         function renderTrains(type, index) {
             const container = document.querySelector(`.${type} .train-list`);
@@ -110,7 +100,7 @@
                 container.appendChild(div);
             });
         }
-        
+
         //更換車次
         function changeTrains(type, direction) {
             if (type === 'departure') {
@@ -139,7 +129,7 @@
             }
             updateSummary();
         }
-        
+
         //更新訂位明細(車票的內容)
         function updateSummary() {
             document.getElementById("outward-train-no").textContent = outwardTrainNo;
@@ -153,12 +143,13 @@
         }
 
         //載入頁面時，渲染車次
-        window.onload = function() {
+        window.onload = function () {
             renderTrains('departure', departureIndex);
             renderTrains('return', returnIndex);
         };
     </script>
 </head>
+
 <body>
     <div class="step-nav">
         <div class="step-list">
@@ -193,7 +184,7 @@
             <a onclick="changeTrains('departure', 1)">更晚車次 →</a>
         </div>
     </div>
-    
+
     <div class="container return">
         <div class="title">回程：(台中 → 台北)</div>
         <div class="date">2025/03/31 (星期日)</div>
@@ -211,10 +202,10 @@
                 <div class="ticket-row">
                     <div class="left">
                         <div class="ticket-way">去程</div>
-                        <div id="outward-date"class="ticket-date">03/20</div>
+                        <div id="outward-date" class="ticket-date">03/20</div>
                     </div>
                     <div class="right">
-                        <div id="outward-train-no" class="ticket-train-no">🚆 621</div>                    
+                        <div id="outward-train-no" class="ticket-train-no">🚆 621</div>
                     </div>
                 </div>
                 <div class="ticket-row">
@@ -234,10 +225,10 @@
                 <div class="ticket-row">
                     <div class="left">
                         <div class="ticket-way">回程</div>
-                        <div id="return-date"class="ticket-date">03/20</div>
+                        <div id="return-date" class="ticket-date">03/20</div>
                     </div>
                     <div class="right">
-                        <div id="return-train-no" class="ticket-train-no">🚆 621</div>                    
+                        <div id="return-train-no" class="ticket-train-no">🚆 621</div>
                     </div>
                 </div>
                 <div class="ticket-row">
@@ -262,19 +253,22 @@
             <span>票數：</span>
             <span>全票 2 張</span>
         </div>
-        
+
 
         <button onclick="window.location='step3.html'">確認車次</button>
-    </div>    
+    </div>
 
     <div class="container">
-        <div class="notice-title">注意事項</div>
-        <ol>
-            <li>本網頁顯示內容為目前於訂位系統搜尋到的可訂車次及票價，實際訂位結果仍以「完成訂位」頁面之內容為主。</li>
-            <li>列車時刻及優惠資訊若有變動，以各車站現場公告為準。</li>
-        </ol>
+        <div class="notice">
+            <div class="notice-title">注意事項</div>
+            <ol>
+                <li>本網頁顯示內容為目前於訂位系統搜尋到的可訂車次及票價，實際訂位結果仍以「完成訂位」頁面之內容為主。</li>
+                <li>列車時刻及優惠資訊若有變動，以各車站現場公告為準。</li>
+            </ol>
+        </div>
     </div>
-    
+
 </body>
 <script>updateSummary();</script>
+
 </html>
