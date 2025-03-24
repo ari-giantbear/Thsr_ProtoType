@@ -9,6 +9,7 @@
     <title>高鐵聯票 - 查詢車次</title>
     <link rel="stylesheet" href="styles.css?v=1.2.7">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="Dialog.js"></script>
 </head>
 
 <body>
@@ -40,14 +41,14 @@
         <div class="header-options">
             <div class="left-options">
                 <div class="dropdown">
-                    <button class="dropdown-btn" onclick="toggleDropdown(this)">去程 <i class="fas fa-chevron-down"></i></button>
+                    <button id="journeyTypeBtn" class="dropdown-btn" onclick="toggleDropdown(this)">去程 <i class="fas fa-chevron-down"></i></button>
                     <div class="dropdown-content">
                         <a href="#" onclick="selectOption(this, '去程')">去程</a>
                         <a href="#" onclick="selectOption(this, '去回程')">去回程</a>
                     </div>
                 </div>
                 <div class="dropdown">
-                    <button class="dropdown-btn" onclick="toggleDropdown(this)">標準車廂 <i class="fas fa-chevron-down"></i></button>
+                    <button id="carTypeBtn" class="dropdown-btn" onclick="toggleDropdown(this)">標準車廂 <i class="fas fa-chevron-down"></i></button>
                     <div class="dropdown-content">
                         <a href="#" onclick="selectOption(this, '標準車廂')">標準車廂</a>
                         <a href="#" onclick="selectOption(this, '商務車廂')">商務車廂</a>
@@ -118,7 +119,9 @@
                         <i class="far fa-clock orange-icon"></i>
                         <div class="input-wrapper">
                             <label>出發時間</label>
-                            <input type="time" class="time-input" id="deptTime" step="600">
+                            <select id="deptTime" class="time-input">
+                                <option value="">請選擇...</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -135,7 +138,9 @@
                         <i class="far fa-clock orange-icon"></i>
                         <div class="input-wrapper">
                             <label>回程時間</label>
-                            <input type="time" class="time-input" id="returnTime" step="600">
+                            <select id="returnTime" class="time-input">
+                                <option value="">請選擇...</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -176,10 +181,165 @@
                 </div>
             </div>
             
-            <button onclick="window.location='step2.html'">開始查詢</button>
+            <button onclick="gotoStep2()">開始查詢</button>
         </div>
     </div>
     <script>
+        // 生成時間選項
+        function generateTimeOptions() {
+            const timeSelects = document.querySelectorAll('.time-input');
+            
+            timeSelects.forEach(select => {
+                for (let hour = 0; hour < 24; hour++) {
+                    for (let minute = 0; minute < 60; minute += 30) {
+                        const timeValue = `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`;
+                        const option = document.createElement('option');
+                        option.value = timeValue;
+                        option.textContent = timeValue;
+                        select.appendChild(option);
+                    }
+                }
+            });
+        }
+
+        // 驗證時間函數
+        function gotoStep2() {
+            // 獲取表單值
+            const startStation = document.querySelector('.station-input:first-child select').value;
+            const endStation = document.querySelector('.station-input:last-child select').value;
+            const departDate = document.getElementById('deptDate').value;
+            const departTime = document.getElementById('deptTime').value;
+            
+            // 檢查行程類型
+            const journeyType = document.getElementById('journeyTypeBtn').textContent.trim();
+            const isRoundTrip = journeyType === '去回程';
+
+            // 檢查必填欄位
+            let missingFields = [];
+            if (!startStation) {
+                missingFields.push('出發站');
+            }
+            if (!endStation) {
+                missingFields.push('抵達站');
+            }
+            if (!departDate) {
+                missingFields.push('去程日期');
+            }
+            if (!departTime) {
+                missingFields.push('去程時間');
+            }
+
+            // 如果是去回程，檢查回程欄位
+            let returnDate = '';
+            let returnTime = '';
+            if (isRoundTrip) {
+                returnDate = document.getElementById('returnDate').value;
+                returnTime = document.getElementById('returnTime').value;
+                
+                if (!returnDate) {
+                    missingFields.push('回程日期');
+                }
+                if (!returnTime) {
+                    missingFields.push('回程時間');
+                }
+            }
+
+            // 如果有缺少欄位，顯示錯誤訊息
+            if (missingFields.length > 0) {
+                showDialog({
+                    caption: '資料輸入不完整',
+                    message: `請輸入以下必填欄位：${missingFields.join('、')}`,
+                    buttons: [
+                        {
+                            text: '確定',
+                            type: 'primary',
+                            onClick: () => closeDialog()
+                        }
+                    ]
+                });
+                return;
+            }
+
+            // 檢查出發站與抵達站是否相同
+            if (startStation === endStation) {
+                showDialog({
+                    caption: '站點錯誤',
+                    message: '出發站與抵達站不可以相同',
+                    buttons: [
+                        {
+                            text: '確定',
+                            type: 'primary',
+                            onClick: () => closeDialog()
+                        }
+                    ]
+                });
+                return;
+            }
+
+            // 取得現在時間
+            const now = new Date();
+            const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+            
+            // 解析出發日期和時間
+            const [deptHours, deptMinutes] = departTime.split(':').map(Number);
+            const deptDateTime = new Date(departDate);
+            deptDateTime.setHours(deptHours, deptMinutes, 0);
+
+            // 檢查出發日期是否大於等於今天
+            if (new Date(departDate) < today) {
+                showDialog({
+                    caption: '日期錯誤',
+                    message: '出發日期必須大於或等於今天',
+                    buttons: [
+                        {
+                            text: '確定',
+                            type: 'primary',
+                            onClick: () => closeDialog()
+                        }
+                    ]
+                });
+                return;
+            }
+
+            // 如果是今天出發，檢查時間是否大於等於現在
+            if (new Date(departDate).getTime() === today.getTime() && deptDateTime < now) {
+                showDialog({
+                    caption: '時間錯誤',
+                    message: '出發時間必須大於或等於現在時間',
+                    buttons: [
+                        {
+                            text: '確定',
+                            type: 'primary',
+                            onClick: () => closeDialog()
+                        }
+                    ]
+                });
+                return;
+            }
+
+            // 如果是去回程，檢查回程日期是否大於出發日期
+            if (isRoundTrip && returnDate) {
+                const returnDateTime = new Date(returnDate);
+                if (returnDateTime <= new Date(departDate)) {
+                    showDialog({
+                        caption: '日期錯誤',
+                        message: '回程日期必須大於出發日期',
+                        buttons: [
+                            {
+                                text: '確定',
+                                type: 'primary',
+                                onClick: () => closeDialog()
+                            }
+                        ]
+                    });
+                    return;
+                }
+            }
+
+            // 如果驗證通過，進行跳轉
+            window.location.href = 'step2.html';
+        }
+        // 計數器按鈕功能
         function decreaseCount(button) {
             const input = button.nextElementSibling;
             let value = parseInt(input.value);
@@ -251,6 +411,9 @@
 
         // 初始化頁面狀態
         document.addEventListener('DOMContentLoaded', function() {
+            // 生成時間選項
+            generateTimeOptions();
+            
             // 初始化計數器按鈕狀態
             document.querySelectorAll('.counter-input').forEach(updateButtonStates);
             
