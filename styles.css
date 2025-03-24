@@ -313,6 +313,7 @@ body {
     margin: 0 auto;
     padding: 0 20px;
     position: relative;
+    gap: 4px;
 }
 
 .step {
@@ -320,14 +321,14 @@ body {
     z-index: 2;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 2px;
     flex: 1;
     transition: all 0.3s ease;
 }
 
 .step-number {
-    width: 20px;
     height: 20px;
+    width: 20px;
     border-radius: 50%;
     background: #fff;
     border: 1px solid #999;
