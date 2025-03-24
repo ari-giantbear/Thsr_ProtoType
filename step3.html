@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
+
 <head>
-    
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
@@ -18,52 +19,65 @@
             border-radius: 8px;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
         }
+
         h2 {
             border-bottom: 2px solid #ddd;
             padding-bottom: 5px;
             font-size: 18px;
             color: #333;
         }
+
         .form-group {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             margin-bottom: 15px;
         }
+
         label {
             font-weight: bold;
             color: #555;
-            width: 30%;
+            width: auto;
         }
-        input, select {
+
+        input,
+        select {
             flex-grow: 1;
             padding: 8px;
             border: 1px solid #ccc;
             border-radius: 4px;
             font-size: 14px;
         }
-        .radio-group, .checkbox-group {
+
+        .radio-group,
+        .checkbox-group {
             display: flex;
             flex-direction: column;
             align-items: flex-start;
             gap: 5px;
         }
-        .radio-group div, .checkbox-group div {
+
+        .radio-group div,
+        .checkbox-group div {
             display: flex;
-            /* align-items: center; */
             align-items: flex-start;
             width: 100%;
         }
-        .radio-group input, .checkbox-group input {
+
+        .radio-group input,
+        .checkbox-group input {
             margin-right: 5px;
         }
+
         .info-list {
             font-size: 14px;
             color: #666;
             padding-left: 15px;
         }
+
         .info-list li {
             margin-bottom: 5px;
         }
+
         button {
             width: 100%;
             padding: 12px;
@@ -76,19 +90,50 @@
             cursor: pointer;
             margin-top: 5px;
         }
+
         button:hover {
             background: #d95b1c;
         }
 
+        .width-custom {
+            width: auto;
+        }
+
+
+        @media (max-width: 768px) {
+            .form-group {
+                flex-direction: column;
+            }
+
+            label {
+                font-weight: bold;
+                color: #555;
+                width: 100%;
+            }
+
+            input,
+            select {
+                flex-grow: 1;
+                padding: 8px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                font-size: 14px;
+                width: fit-content;
+            }
+
+            .width-custom {
+                width: 100%;
+            }
+        }
     </style>
-    
+
     <script>
         function toggleTgoInput() {
             var tgoInput = document.getElementById("tgoInputSection");
             var tgoRadio = document.getElementById("tgoMember");
             tgoInput.style.display = tgoRadio.checked ? "block" : "none";
         }
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             var radios = document.getElementsByName("member");
             radios.forEach(radio => {
                 radio.addEventListener("change", toggleTgoInput);
@@ -97,6 +142,7 @@
         });
     </script>
 </head>
+
 <body>
     <div class="step-nav">
         <div class="step-list">
@@ -130,10 +176,10 @@
                 <div class="ticket-row">
                     <div class="left">
                         <div class="ticket-way">去程</div>
-                        <div id="outward-date"class="ticket-date">03/20</div>
+                        <div id="outward-date" class="ticket-date">03/20</div>
                     </div>
                     <div class="right">
-                        <div id="outward-train-no" class="ticket-train-no">🚆 621</div>                    
+                        <div id="outward-train-no" class="ticket-train-no">🚆 621</div>
                     </div>
                 </div>
                 <div class="ticket-row">
@@ -153,10 +199,10 @@
                 <div class="ticket-row">
                     <div class="left">
                         <div class="ticket-way">回程</div>
-                        <div id="return-date"class="ticket-date">03/20</div>
+                        <div id="return-date" class="ticket-date">03/20</div>
                     </div>
                     <div class="right">
-                        <div id="return-train-no" class="ticket-train-no">🚆 621</div>                    
+                        <div id="return-train-no" class="ticket-train-no">🚆 621</div>
                     </div>
                 </div>
                 <div class="ticket-row">
@@ -181,40 +227,40 @@
             <span>票數：</span>
             <span>全票 2 張</span>
         </div>
-    </div>    
+    </div>
 
     <div class="container">
         <div class="section">
             <h2>取票人資訊</h2>
             <div class="form-group">
                 <label for="idType">取票證別</label>
-                <select id="idType">
+                <select id="idType" class="width-custom">
                     <option>身分證字號</option>
                 </select>
             </div>
             <div class="form-group">
-                <label for="idNumber">身分證字號</label>
-                <input type="text" id="idNumber">
+                <label for="idNumber">身分證號</label>
+                <input type="text" id="idNumber" class="width-custom">
             </div>
             <div class="form-group">
                 <label for="phone">聯絡電話</label>
-                <input type="text" id="phone">
+                <input type="text" id="phone" class="width-custom">
             </div>
             <div class="form-group">
                 <label for="email">電子郵件</label>
-                <input type="email" id="email">
+                <input type="email" id="email" class="width-custom">
             </div>
         </div>
-        
+
         <div class="section">
             <h2>乘客資訊</h2>
             <div class="form-group">
                 <label for="passenger1">乘客 1 - 愛心票</label>
-                <input type="text" id="passenger1" placeholder="身分證字號">
+                <input type="text" id="passenger1" placeholder="身分證字號" class="width-custom">
             </div>
             <div class="form-group">
                 <label for="passenger2">乘客 2 - 愛心票</label>
-                <input type="text" id="passenger2" placeholder="身分證字號">
+                <input type="text" id="passenger2" placeholder="身分證字號" class="width-custom">
             </div>
             <ul class="info-list">
                 <li>購買敬老票、愛心票應填寫搭乘者之中華民國身分證字號。</li>
@@ -222,49 +268,36 @@
                 <li>兒童票適用於六歲以上但未滿十二歲之兒童。</li>
             </ul>
         </div>
-        
+
         <div class="section">
             <h2>高鐵會員資訊</h2>
             <ul class="info-list">
                 <li>輸入高鐵會員 TGo 帳號，可累積會員點數並享有專屬回饋。</li>
                 <li>高鐵會員 TGo 無法與企業會員同時累計，請擇一填寫。</li>
             </ul>
-            <div class="radio-group">
+            <div>
                 <div><input type="radio" id="nonMember" name="member" checked>
-                    <div for="nonMember">非高鐵會員 TGo / 企業會員</div>
-                </div>
-                <div><input type="radio" id="tgoMember" name="member">
-                    <div for="tgoMember">高鐵會員 TGo 帳號</div>
-                    <input type="text" id="tgoInputSection" placeholder="請輸入帳號">
-                    <!-- <div id="tgoInputSection">
-                        <input type="text" id="tgoNumberText" placeholder="請輸入帳號">
-                    </div> -->
+                    <label for="nonMember">非高鐵會員 TGo / 企業會員
                 </div>
             </div>
-
-            <!--
-            <div id="tgoInputSection" class="tgo-input">
-                <div class="form-group">
-                    <div for="tgoNumber">高鐵會員 TGo 帳號</div>
-                    <input type="text" id="tgoNumber" placeholder="請輸入帳號">
-                </div>
-                <div class="form-group">
-                    <input type="checkbox" id="sameAsId">
-                    <div for="sameAsId">同取票人身分證字號</div>
-                </div>
-                <p class="info-list">相關會員權益詳見 <a href="#">高鐵會員 TGo 會員權益</a>。</p>
-            </div>-->
-        </div>
-
-        <div class="section">
-            <div class="checkbox-group">
-                <div>
-                    <input type="checkbox" id="agree">
-                    <div for="agree">我已明確了解線上購票交易及取票規則</div>
-                </div>
+            <div>
+                <input type="radio" id="tgoMember" name="member">
+                <label for="tgoMember">高鐵會員 TGo 帳號
             </div>
-            <button onclick="window.location='step4.html'">完成訂位</button>
+            <input type="text" id="tgoInputSection" placeholder="請輸入帳號">
         </div>
     </div>
+    </div>
+
+    <div class="section">
+        <div>
+            <input type="checkbox" id="agree">
+            <label for="agree">我已明確了解線上購票交易及取票規則
+        </div>
+    </div>
+    <button onclick="window.location='step4.html'">完成訂位</button>
+    </div>
+    </div>
 </body>
+
 </html>
