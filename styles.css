@@ -18,6 +18,19 @@ body {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+button {
+    width: 100%;
+    padding: 12px;
+    background: #f37021;
+    border: none;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
 /* Header Options */
 .header-options {
     display: flex;
