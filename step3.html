@@ -11,6 +11,8 @@
     <title>高鐵聯票 - 取票資訊</title>
     <link rel="stylesheet" href="styles.css?v=1.2.7">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="Dialog.js"></script>
+
     <style>
         .section {
             margin-bottom: 20px;
@@ -125,6 +127,10 @@
             });
             toggleTgoInput();
         });
+
+        function gotoStep4() {
+            window.location.href = 'step4.html';
+        }
     </script>
 </head>
 
@@ -277,7 +283,7 @@
                 <label for="agree">我已明確了解線上購票交易及取票規則
             </div>
         </div>
-        <button onclick="window.location='step4.html'">完成訂位</button>
+        <button onclick="gotoStep4()">完成訂位</button>
     </div>
 </body>
 
