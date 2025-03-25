@@ -42,18 +42,16 @@
         <div class="header-options">
             <div class="left-options">
                 <div class="dropdown">
-                    <button id="direction" class="dropdown-btn" onclick="toggleDropdown(this)">去程 <i class="fas fa-chevron-down"></i></button>
-                    <div class="dropdown-content">
-                        <a href="#" onclick="selectOption(this, '去程')">去程</a>
-                        <a href="#" onclick="selectOption(this, '去回程')">去回程</a>
-                    </div>
+                    <select id="direction" class="input-wrapper select-input" onchange="handleDirectionChange(this)">
+                        <option value="OneWay">去程</option>
+                        <option value="RoundTrip">去回程</option>
+                    </select>
                 </div>
                 <div class="dropdown">
-                    <button id="trainClass" class="dropdown-btn" onclick="toggleDropdown(this)">標準車廂 <i class="fas fa-chevron-down"></i></button>
-                    <div class="dropdown-content">
-                        <a href="#" onclick="selectOption(this, '標準車廂')">標準車廂</a>
-                        <a href="#" onclick="selectOption(this, '商務車廂')">商務車廂</a>
-                    </div>
+                    <select id="trainClass" class="input-wrapper select-input">
+                        <option value="Y">標準車廂</option>
+                        <option value="J">商務車廂</option>
+                    </select>
                 </div>
             </div>
         </div>
@@ -187,11 +185,11 @@
             const endStation = document.querySelector('.station-input:last-child select').value;
             const departDate = document.getElementById('outwardDate').value;
             const departTime = document.getElementById('outwardTime').value;
-            const trainClass = document.getElementById('trainClass').textContent.trim();
+            const trainClass = document.getElementById('trainClass').value;
             
             // 檢查行程類型
-            const journeyType = document.getElementById('direction').textContent.trim();
-            const isRoundTrip = journeyType === '去回程';
+            const journeyType = document.getElementById('direction').value;
+            const isRoundTrip = journeyType === 'RoundTrip';
 
             // 檢查必填欄位
             let missingFields = [];
@@ -388,6 +386,18 @@
             }
         }
 
+        function handleDirectionChange(select) {
+            const returnGroup = document.getElementById('returnGroup');
+            if (select.value === 'OneWay') {
+                returnGroup.style.display = 'none';
+                // 清空回程的值
+                document.getElementById('returnDate').value = '';
+                document.getElementById('returnTime').value = '';
+            } else if (select.value === 'RoundTrip') {
+                returnGroup.style.display = 'flex';
+            }
+        }
+
         // 初始化頁面狀態
         document.addEventListener('DOMContentLoaded', function() {
             // 生成時間選項
@@ -397,9 +407,9 @@
             document.querySelectorAll('.counter-input').forEach(updateButtonStates);
             
             // 初始化回程欄位顯示狀態
-            const journeyTypeBtn = document.querySelector('.dropdown-btn');
+            const directionSelect = document.getElementById('direction');
             const returnGroup = document.getElementById('returnGroup');
-            if (journeyTypeBtn.textContent.trim() === '去程') {
+            if (directionSelect.value === 'OneWay') {
                 returnGroup.style.display = 'none';
                 // 清空回程的值
                 document.getElementById('returnDate').value = '';
@@ -441,7 +451,7 @@
 
         function generateJson() {
             const jsonData = {
-                direction: document.getElementById("direction").textContent.trim(),
+                direction: document.getElementById("direction").value,
                 dept: document.getElementById("dept").value,
                 dest: document.getElementById("dest").value,
                 outwardDate: document.getElementById("outwardDate").value.replace(/-/g, ""),
@@ -452,7 +462,7 @@
                 pngChild: parseInt(document.getElementById("pngChild").value, 10),
                 pngElderly: parseInt(document.getElementById("pngElderly").value, 10),
                 pngLove: parseInt(document.getElementById("pngLove").value, 10),
-                trainClass: document.getElementById("trainClass").textContent.trim()
+                trainClass: document.getElementById("trainClass").value
             };
             return jsonData;
         }
