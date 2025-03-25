@@ -67,18 +67,6 @@
                             <label>出發站</label>
                             <select>
                                 <option value="">請選擇...</option>
-                                <option value="nangang">南港</option>
-                                <option value="taipei">台北</option>
-                                <option value="banqiao">板橋</option>
-                                <option value="taoyuan">桃園</option>
-                                <option value="hsinchu">新竹</option>
-                                <option value="miaoli">苗栗</option>
-                                <option value="taichung">台中</option>
-                                <option value="changhua">彰化</option>
-                                <option value="yunlin">雲林</option>
-                                <option value="chiayi">嘉義</option>
-                                <option value="tainan">台南</option>
-                                <option value="zuoying">左營</option>
                             </select>
                         </div>
                     </div>
@@ -91,18 +79,6 @@
                             <label>抵達站</label>
                             <select>
                                 <option value="">請選擇...</option>
-                                <option value="nangang">南港</option>
-                                <option value="taipei">台北</option>
-                                <option value="banqiao">板橋</option>
-                                <option value="taoyuan">桃園</option>
-                                <option value="hsinchu">新竹</option>
-                                <option value="miaoli">苗栗</option>
-                                <option value="taichung">台中</option>
-                                <option value="changhua">彰化</option>
-                                <option value="yunlin">雲林</option>
-                                <option value="chiayi">嘉義</option>
-                                <option value="tainan">台南</option>
-                                <option value="zuoying">左營</option>
                             </select>
                         </div>
                     </div>
@@ -429,6 +405,34 @@
             } else {
                 returnGroup.style.display = 'flex';
             }
+
+            const stations = [
+                { value: "nangang", text: "南港" },
+                { value: "taipei", text: "台北" },
+                { value: "banqiao", text: "板橋" },
+                { value: "taoyuan", text: "桃園" },
+                { value: "hsinchu", text: "新竹" },
+                { value: "miaoli", text: "苗栗" },
+                { value: "taichung", text: "台中" },
+                { value: "changhua", text: "彰化" },
+                { value: "yunlin", text: "雲林" },
+                { value: "chiayi", text: "嘉義" },
+                { value: "tainan", text: "台南" },
+                { value: "zuoying", text: "左營" }
+            ];
+
+            function populateStationDropdown(selector) {
+                const dropdown = document.querySelector(selector);
+                stations.forEach(station => {
+                    const option = document.createElement('option');
+                    option.value = station.value;
+                    option.textContent = station.text;
+                    dropdown.appendChild(option);
+                });
+            }
+
+            populateStationDropdown('.station-input:first-child select');
+            populateStationDropdown('.station-input:last-child select');
         });
     </script>
 </body>
