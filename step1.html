@@ -42,14 +42,14 @@
         <div class="header-options">
             <div class="left-options">
                 <div class="dropdown">
-                    <button id="journeyTypeBtn" class="dropdown-btn" onclick="toggleDropdown(this)">去程 <i class="fas fa-chevron-down"></i></button>
+                    <button id="direction" class="dropdown-btn" onclick="toggleDropdown(this)">去程 <i class="fas fa-chevron-down"></i></button>
                     <div class="dropdown-content">
                         <a href="#" onclick="selectOption(this, '去程')">去程</a>
                         <a href="#" onclick="selectOption(this, '去回程')">去回程</a>
                     </div>
                 </div>
                 <div class="dropdown">
-                    <button id="carTypeBtn" class="dropdown-btn" onclick="toggleDropdown(this)">標準車廂 <i class="fas fa-chevron-down"></i></button>
+                    <button id="trainClass" class="dropdown-btn" onclick="toggleDropdown(this)">標準車廂 <i class="fas fa-chevron-down"></i></button>
                     <div class="dropdown-content">
                         <a href="#" onclick="selectOption(this, '標準車廂')">標準車廂</a>
                         <a href="#" onclick="selectOption(this, '商務車廂')">商務車廂</a>
@@ -65,7 +65,7 @@
                         <i class="fas fa-map-marker-alt orange-icon"></i>
                         <div class="input-wrapper">
                             <label>出發站</label>
-                            <select>
+                            <select id="dept">
                                 <option value="">請選擇...</option>
                             </select>
                         </div>
@@ -77,7 +77,7 @@
                         <i class="fas fa-map-marker-alt orange-icon"></i>
                         <div class="input-wrapper">
                             <label>抵達站</label>
-                            <select>
+                            <select id="dest">
                                 <option value="">請選擇...</option>
                             </select>
                         </div>
@@ -89,14 +89,14 @@
                         <i class="far fa-calendar orange-icon"></i>
                         <div class="input-wrapper">
                             <label>出發日期</label>
-                            <input type="date" class="date-input" id="deptDate">
+                            <input type="date" class="date-input" id="outwardDate">
                         </div>
                     </div>
                     <div class="date-time-input">
                         <i class="far fa-clock orange-icon"></i>
                         <div class="input-wrapper">
                             <label>出發時間</label>
-                            <select id="deptTime" class="time-input">
+                            <select id="outwardTime" class="time-input">
                                 <option value="">請選擇...</option>
                             </select>
                         </div>
@@ -128,7 +128,7 @@
                     <label>全票</label>
                     <div class="counter-input">
                         <button class="minus-btn" onclick="decreaseCount(this)">-</button>
-                        <input type="number" value="1" min="0" max="9" readonly>
+                        <input id="pngAdult" type="number" value="1" min="0" max="9" readonly>
                         <button class="plus-btn" onclick="increaseCount(this)">+</button>
                     </div>
                 </div>
@@ -136,7 +136,7 @@
                     <label>孩童票(6-11)</label>
                     <div class="counter-input">
                         <button class="minus-btn" onclick="decreaseCount(this)">-</button>
-                        <input type="number" value="0" min="0" max="9" readonly>
+                        <input id="pngChild" type="number" value="0" min="0" max="9" readonly>
                         <button class="plus-btn" onclick="increaseCount(this)">+</button>
                     </div>
                 </div>
@@ -144,7 +144,7 @@
                     <label>愛心票</label>
                     <div class="counter-input">
                         <button class="minus-btn" onclick="decreaseCount(this)">-</button>
-                        <input type="number" value="0" min="0" max="9" readonly>
+                        <input id="pngLove" type="number" value="0" min="0" max="9" readonly>
                         <button class="plus-btn" onclick="increaseCount(this)">+</button>
                     </div>
                 </div>
@@ -152,7 +152,7 @@
                     <label>敬老票(65+)</label>
                     <div class="counter-input">
                         <button class="minus-btn" onclick="decreaseCount(this)">-</button>
-                        <input type="number" value="0" min="0" max="9" readonly>
+                        <input id="pngElderly" type="number" value="0" min="0" max="9" readonly>
                         <button class="plus-btn" onclick="increaseCount(this)">+</button>
                     </div>
                 </div>
@@ -181,14 +181,16 @@
 
         // 驗證時間函數
         function gotoStep2() {
+            alert(JSON.stringify(generateJson(), null, 2)); // 格式化 JSON 並顯示
             // 獲取表單值
             const startStation = document.querySelector('.station-input:first-child select').value;
             const endStation = document.querySelector('.station-input:last-child select').value;
-            const departDate = document.getElementById('deptDate').value;
-            const departTime = document.getElementById('deptTime').value;
+            const departDate = document.getElementById('outwardDate').value;
+            const departTime = document.getElementById('outwardTime').value;
+            const trainClass = document.getElementById('trainClass').textContent.trim();
             
             // 檢查行程類型
-            const journeyType = document.getElementById('journeyTypeBtn').textContent.trim();
+            const journeyType = document.getElementById('direction').textContent.trim();
             const isRoundTrip = journeyType === '去回程';
 
             // 檢查必填欄位
@@ -259,8 +261,8 @@
             
             // 解析出發日期和時間
             const [deptHours, deptMinutes] = departTime.split(':').map(Number);
-            const deptDateTime = new Date(departDate);
-            deptDateTime.setHours(deptHours, deptMinutes, 0);
+            const outwardDateTime = new Date(departDate);
+            outwardDateTime.setHours(deptHours, deptMinutes, 0);
 
             // 檢查出發日期是否大於等於今天
             if (new Date(departDate) < today) {
@@ -279,7 +281,7 @@
             }
 
             // 如果是今天出發，檢查時間是否大於等於現在
-            if (new Date(departDate).getTime() === today.getTime() && deptDateTime < now) {
+            if (new Date(departDate).getTime() === today.getTime() && outwardDateTime < now) {
                 showDialog({
                     caption: '時間錯誤',
                     message: '出發時間必須大於或等於現在時間',
@@ -436,6 +438,27 @@
             populateStationDropdown('.station-input:first-child select');
             populateStationDropdown('.station-input:last-child select');
         });
+
+        function generateJson() {
+            const jsonData = {
+                direction: document.getElementById("direction").textContent.trim(),
+                dept: document.getElementById("dept").value,
+                dest: document.getElementById("dest").value,
+                outwardDate: document.getElementById("outwardDate").value.replace(/-/g, ""),
+                outwardTime: document.getElementById("outwardTime").value.replace(":", ""),
+                returnDate: document.getElementById("returnDate").value.replace(/-/g, ""),
+                returnTime: document.getElementById("returnTime").value.replace(":", ""),
+                pngAdult: parseInt(document.getElementById("pngAdult").value, 10),
+                pngChild: parseInt(document.getElementById("pngChild").value, 10),
+                pngElderly: parseInt(document.getElementById("pngElderly").value, 10),
+                pngLove: parseInt(document.getElementById("pngLove").value, 10),
+                trainClass: document.getElementById("trainClass").textContent.trim()
+            };
+            return jsonData;
+        }
+
+        // Example usage:
+        // Call generateJson() to log the JSON object to the console.
     </script>
 </body>
 </html>
