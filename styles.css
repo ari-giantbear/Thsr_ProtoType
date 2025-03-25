@@ -44,6 +44,7 @@ button {
 .left-options {
     display: flex;
     gap: 15px;
+    width: 60%;
 }
 
 .dropdown {
