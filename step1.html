@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -65,14 +66,14 @@
                     <div class="date-time-input">
                         <i class="far fa-calendar orange-icon"></i>
                         <div class="input-wrapper">
-                            <label>出發日期</label>
+                            <label>去程日期</label>
                             <input type="date" class="date-input" id="outwardDate">
                         </div>
                     </div>
                     <div class="date-time-input">
                         <i class="far fa-clock orange-icon"></i>
                         <div class="input-wrapper">
-                            <label>出發時間</label>
+                            <label>去程時間</label>
                             <select id="outwardTime" class="time-input">
                                 <option value="">請選擇...</option>
                             </select>
@@ -134,7 +135,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <button onclick="gotoStep2()">開始查詢</button>
         </div>
     </div>
@@ -142,7 +143,7 @@
         // 生成時間選項
         function generateTimeOptions() {
             const timeSelects = document.querySelectorAll('.time-input');
-            
+
             timeSelects.forEach(select => {
                 for (let hour = 0; hour < 24; hour++) {
                     for (let minute = 0; minute < 60; minute += 30) {
@@ -190,7 +191,7 @@
             if (isRoundTrip) {
                 returnDate = document.getElementById('returnDate').value;
                 returnTime = document.getElementById('returnTime').value;
-                
+
                 if (!returnDate) {
                     missingFields.push('回程日期');
                 }
@@ -198,7 +199,6 @@
                     missingFields.push('回程時間');
                 }
             }
-
 
             // 如果有缺少欄位，顯示錯誤訊息
             if (missingFields.length > 0) {
@@ -237,7 +237,7 @@
             // 取得現在時間
             const now = new Date();
             const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-            
+
             // 解析出發日期和時間
             const [outwardHours, outwardMinutes] = outwardTime.split(':').map(Number);
             let outwardDateTime = new Date(outwardDate);
@@ -359,7 +359,7 @@
         }
 
         // 點擊其他地方時關閉下拉選單
-        window.onclick = function(event) {
+        window.onclick = function (event) {
             if (!event.target.matches('.dropdown-btn') && !event.target.matches('.fa-chevron-down')) {
                 document.querySelectorAll('.dropdown-content').forEach(content => {
                     content.classList.remove('show');
@@ -380,16 +380,16 @@
         }
 
         // 初始化頁面狀態
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // 生成導航步驟
             document.getElementById('stepNavContainer').innerHTML = generateStepNav(1);
-            
+
             // 生成時間選項
             generateTimeOptions();
-            
+
             // 初始化計數器按鈕狀態
             document.querySelectorAll('.counter-input').forEach(updateButtonStates);
-            
+
             // 初始化回程欄位顯示狀態
             const directionSelect = document.getElementById('direction');
             const returnGroup = document.getElementById('returnGroup');
@@ -456,5 +456,5 @@
         // Call generateJson() to log the JSON object to the console.
     </script>
 </body>
-</html>
 
+</html>
