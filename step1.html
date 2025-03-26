@@ -19,12 +19,14 @@
     <div class="container">
         <div class="header-options">
             <div class="left-options">
+                <!-- 行程類型選擇 -->
                 <div class="input-wrapper">
                     <select id="direction" onchange="handleDirectionChange(this)">
                         <option value="OneWay">去程</option>
                         <option value="RoundTrip">去回程</option>
                     </select>
                 </div>
+                <!-- 車廂類型選擇 -->
                 <div class="input-wrapper">
                     <select id="trainClass">
                         <option value="Y">標準車廂</option>
@@ -37,6 +39,7 @@
         <div class="ticket-form">
             <div class="journey-selection">
                 <div class="station-group">
+                    <!-- 出發站選擇 -->
                     <div class="station-input">
                         <i class="fas fa-map-marker-alt orange-icon"></i>
                         <div class="input-wrapper">
@@ -51,6 +54,8 @@
                         <i class="fas fa-exchange-alt"></i>
                     </div>
                     -->
+
+                    <!-- 抵達站選擇 -->
                     <div class="station-input">
                         <i class="fas fa-map-marker-alt orange-icon"></i>
                         <div class="input-wrapper">
@@ -62,7 +67,9 @@
                     </div>
                 </div>
 
+                <!-- 去程日期時間選擇 -->
                 <div class="date-time-group">
+                    <!-- 去程日期選擇 -->
                     <div class="date-time-input">
                         <i class="far fa-calendar orange-icon"></i>
                         <div class="input-wrapper">
@@ -70,6 +77,7 @@
                             <input type="date" class="date-input" id="outwardDate">
                         </div>
                     </div>
+                    <!-- 去程時間選擇 -->
                     <div class="date-time-input">
                         <i class="far fa-clock orange-icon"></i>
                         <div class="input-wrapper">
@@ -81,7 +89,9 @@
                     </div>
                 </div>
 
+                <!-- 回程日期時間選擇 -->
                 <div class="date-time-group" id="returnGroup">
+                    <!-- 回程日期選擇 -->
                     <div class="date-time-input">
                         <i class="far fa-calendar orange-icon"></i>
                         <div class="input-wrapper">
@@ -89,6 +99,7 @@
                             <input type="date" class="date-input" id="returnDate">
                         </div>
                     </div>
+                    <!-- 回程時間選擇 -->
                     <div class="date-time-input">
                         <i class="far fa-clock orange-icon"></i>
                         <div class="input-wrapper">
@@ -101,7 +112,9 @@
                 </div>
             </div>
 
+            <!-- 票種的數量選擇 -->
             <div class="ticket-types">
+                <!-- 全票數量選擇 -->
                 <div class="ticket-counter">
                     <label>全票</label>
                     <div class="counter-input">
@@ -110,6 +123,7 @@
                         <button class="plus-btn" onclick="increaseCount(this)">+</button>
                     </div>
                 </div>
+                <!-- 孩童票數量選擇 -->
                 <div class="ticket-counter">
                     <label>孩童票(6-11)</label>
                     <div class="counter-input">
@@ -118,6 +132,7 @@
                         <button class="plus-btn" onclick="increaseCount(this)">+</button>
                     </div>
                 </div>
+                <!-- 愛心票數量選擇 -->
                 <div class="ticket-counter">
                     <label>愛心票</label>
                     <div class="counter-input">
@@ -126,6 +141,7 @@
                         <button class="plus-btn" onclick="increaseCount(this)">+</button>
                     </div>
                 </div>
+                <!-- 敬老票數量選擇 -->
                 <div class="ticket-counter">
                     <label>敬老票(65+)</label>
                     <div class="counter-input">
@@ -367,6 +383,7 @@
             }
         }
 
+        // 切換行程類型時，清空回程的值
         function handleDirectionChange(select) {
             const returnGroup = document.getElementById('returnGroup');
             if (select.value === 'OneWay') {
@@ -418,6 +435,7 @@
                 { value: "zuoying", text: "左營" }
             ];
 
+            // 填充站名下拉選單
             function populateStationDropdown(selector) {
                 const dropdown = document.querySelector(selector);
                 stations.forEach(station => {
