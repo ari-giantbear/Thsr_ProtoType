@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="styles.css?v=1.2.7">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <script src="Dialog.js"></script>
+    <script src="script.js"></script>
 
     <style>
         .section {
@@ -135,31 +136,7 @@
 </head>
 
 <body>
-    <div class="step-nav">
-        <div class="step-list">
-            <div class="step completed">
-                <div class="step-number">1</div>
-                <div class="step-text">查詢車次</div>
-            </div>
-            <div class="step completed">
-                <div class="step-number">2</div>
-                <div class="step-text">選擇車次</div>
-            </div>
-            <div class="step active">
-                <div class="step-number">3</div>
-                <div class="step-text">取票資訊</div>
-            </div>
-            <div class="step">
-                <div class="step-number">4</div>
-                <div class="step-text">完成訂位</div>
-            </div>
-            <div class="step">
-                <div class="step-number">5</div>
-                <div class="step-text">繳款完成</div>
-            </div>
-        </div>
-    </div>
-
+    <div id="stepNavContainer"></div>
     <div class="container">
         <div class="title">訂位明細</div>
         <div class="ticket-area">
@@ -285,6 +262,20 @@
         </div>
         <button onclick="gotoStep4()">完成訂位</button>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 生成導航步驟
+            document.getElementById('stepNavContainer').innerHTML = generateStepNav(3);
+            
+            // 初始化表單
+            var radios = document.getElementsByName("member");
+            radios.forEach(radio => {
+                radio.addEventListener("change", toggleTgoInput);
+            });
+            toggleTgoInput();
+        });
+    </script>
 </body>
 
 </html>
