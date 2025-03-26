@@ -199,6 +199,7 @@
                 }
             }
 
+
             // 如果有缺少欄位，顯示錯誤訊息
             if (missingFields.length > 0) {
                 showDialog({
@@ -218,7 +219,7 @@
             }
 
             // 檢查出發站與抵達站是否相同
-            if (startStation === endStation) {
+            if (deptStation === destStation) {
                 showDialog({
                     caption: '站點錯誤',
                     message: '出發站與抵達站不可以相同',
@@ -238,12 +239,12 @@
             const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
             
             // 解析出發日期和時間
-            const [deptHours, deptMinutes] = departTime.split(':').map(Number);
-            const outwardDateTime = new Date(departDate);
-            outwardDateTime.setHours(deptHours, deptMinutes, 0);
+            const [outwardHours, outwardMinutes] = outwardTime.split(':').map(Number);
+            let outwardDateTime = new Date(outwardDate);
+            outwardDateTime.setHours(outwardHours, outwardMinutes, 0);
 
             // 檢查出發日期是否大於等於今天
-            if (new Date(departDate) < today) {
+            if (new Date(outwardDate) < today) {
                 showDialog({
                     caption: '日期錯誤',
                     message: '出發日期必須大於或等於今天',
@@ -259,7 +260,7 @@
             }
 
             // 如果是今天出發，檢查時間是否大於等於現在
-            if (new Date(departDate).getTime() === today.getTime() && outwardDateTime < now) {
+            if (new Date(outwardDate).getTime() === today.getTime() && outwardDateTime < now) {
                 showDialog({
                     caption: '時間錯誤',
                     message: '出發時間必須大於或等於現在時間',
