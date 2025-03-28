@@ -16,18 +16,18 @@
 
     
 <style>
-        .navigation {
+        .thsr-navigation {
             display: flex;
             justify-content: space-between;
             margin-top: 10px;
         }
 
-        .navigation a {
+        .thsr-navigation a {
             color: #007bff;
             cursor: pointer;
         }
 
-        .summary {
+        .thsr-summary {
             max-width: 600px;
             margin: auto;
             background: white;
@@ -37,8 +37,8 @@
             margin-bottom: 20px;
         }
 
-        .summary,
-        .container .ticket-detail {
+        .thsr-summary,
+        .thsr-container .thsr-ticket-detail {
             display: flex;
             justify-content: space-between;
             margin-bottom: 10px;
@@ -46,13 +46,13 @@
             color: #666;
         }
 
-        .notice {
+        .thsr-notice {
             padding-left: 20px;
             padding-right: 20px;
             background: #f9f9f9;
         }
 
-        .notice-title {
+        .thsr-notice-title {
             font-weight: bold;
             margin-bottom: 5px;
         }
@@ -91,13 +91,13 @@
 
         //渲染車次
         function renderTrains(type, index) {
-            const container = document.querySelector(`.${type} .train-list`);
+            const container = document.querySelector(`.thsr-${type} .thsr-train-list`);
             container.innerHTML = '';
             trains.slice(index, index + 5).forEach(train => {
                 const div = document.createElement('div');
-                div.className = 'train-option';
+                div.className = 'thsr-train-option';
                 div.onclick = () => selectTrain(div, type, train);
-                div.innerHTML = `<div class='ticket-time'>${train.time} </div> <div class='duration'>${train.duration}</div><div class='train-no'>${train.trainNo}</div>`;
+                div.innerHTML = `<div class='thsr-ticket-time'>${train.time} </div> <div class='thsr-duration'>${train.duration}</div><div class='thsr-train-no'>${train.trainNo}</div>`;
                 container.appendChild(div);
             });
         }
@@ -115,7 +115,7 @@
 
         //選擇車次
         function selectTrain(element, type, train) {
-            document.querySelectorAll(`.${type} .train-option`).forEach(el => el.classList.remove('selected'));
+            document.querySelectorAll(`.thsr-${type} .thsr-train-option`).forEach(el => el.classList.remove('selected'));
             element.classList.add('selected');
             if (type === 'departure') {
                 outwardDeptTime = train.startTime;
@@ -163,7 +163,7 @@
             }
 
             // 檢查是否為去回程
-            const returnTicket = document.querySelector('.return');
+            const returnTicket = document.querySelector('.thsr-return');
             if (returnTicket && returnTicket.style.display !== 'none' && !returnTrainNo) {
                 showDialog({
                     caption: '車次選擇不完整',
@@ -192,92 +192,92 @@
 </head>
 
 <body>
-    <div id="stepNavContainer"></div>
-    <div class="container departure">
-        <div class="title">去程：(台北 → 台中)</div>
-        <div class="date">2025/03/20 (星期四)</div>
-        <div class="train-list"></div>
-        <div class="navigation">
+    <div id="stepNavContainer" class="thsr-step-nav"></div>
+    <div class="thsr-container thsr-departure">
+        <div class="thsr-title">去程：(台北 → 台中)</div>
+        <div class="thsr-date">2025/03/20 (星期四)</div>
+        <div class="thsr-train-list"></div>
+        <div class="thsr-navigation">
             <a onclick="changeTrains('departure', -1)">← 更早車次</a>
             <a onclick="changeTrains('departure', 1)">更晚車次 →</a>
         </div>
     </div>
 
-    <div class="container return">
-        <div class="title">回程：(台中 → 台北)</div>
-        <div class="date">2025/03/31 (星期日)</div>
-        <div class="train-list"></div>
-        <div class="navigation">
+    <div class="thsr-container thsr-return">
+        <div class="thsr-title">回程：(台中 → 台北)</div>
+        <div class="thsr-date">2025/03/31 (星期日)</div>
+        <div class="thsr-train-list"></div>
+        <div class="thsr-navigation">
             <a onclick="changeTrains('return', -1)">← 更早車次</a>
             <a onclick="changeTrains('return', 1)">更晚車次 →</a>
         </div>
     </div>
 
-    <div class="container">
-        <div class="title">訂位明細</div>
-        <div class="ticket-area">
-            <div class="ticket">
-                <div class="ticket-row">
+    <div class="thsr-container">
+        <div class="thsr-title">訂位明細</div>
+        <div class="thsr-ticket-area">
+            <div class="thsr-ticket">
+                <div class="thsr-ticket-row">
                     <div class="left">
-                        <div class="ticket-way">去程</div>
-                        <div id="outward-date" class="ticket-date">03/20</div>
+                        <div class="thsr-ticket-way">去程</div>
+                        <div id="outward-date" class="thsr-ticket-date">03/20</div>
                     </div>
                     <div class="right">
-                        <div id="outward-train-no" class="ticket-train-no">🚆 621</div>
+                        <div id="outward-train-no" class="thsr-ticket-train-no">🚆 621</div>
                     </div>
                 </div>
-                <div class="ticket-row">
-                    <div class="left flex-column">
-                        <div id="outward-dept-time" class="ticket-time">09:46</div>
-                        <div id="outward-dept-station" class="station">台北</div>
+                <div class="thsr-ticket-row">
+                    <div class="left thsr-flex-column">
+                        <div id="outward-dept-time" class="thsr-ticket-time">09:46</div>
+                        <div id="outward-dept-station" class="thsr-station">台北</div>
                     </div>
-                    <div id="outward-duration" class="through">⏱1:28</div>
-                    <div class="right flex-column">
-                        <div id="outward-dest-time" class="ticket-time">10:46</div>
-                        <div id="outward-dest-station" class="station">台中</div>
+                    <div id="outward-duration" class="thsr-through">⏱1:28</div>
+                    <div class="right thsr-flex-column">
+                        <div id="outward-dest-time" class="thsr-ticket-time">10:46</div>
+                        <div id="outward-dest-station" class="thsr-station">台中</div>
                     </div>
                 </div>
             </div>
 
-            <div class="ticket">
-                <div class="ticket-row">
+            <div class="thsr-ticket">
+                <div class="thsr-ticket-row">
                     <div class="left">
-                        <div class="ticket-way">回程</div>
-                        <div id="return-date" class="ticket-date">03/20</div>
+                        <div class="thsr-ticket-way">回程</div>
+                        <div id="return-date" class="thsr-ticket-date">03/20</div>
                     </div>
                     <div class="right">
-                        <div id="return-train-no" class="ticket-train-no">🚆 621</div>
+                        <div id="return-train-no" class="thsr-ticket-train-no">🚆 621</div>
                     </div>
                 </div>
-                <div class="ticket-row">
-                    <div class="left flex-column">
-                        <div id="return-dept-time" class="ticket-time">09:46</div>
-                        <div id="return-dept-station" class="station">台中</div>
+                <div class="thsr-ticket-row">
+                    <div class="left thsr-flex-column">
+                        <div id="return-dept-time" class="thsr-ticket-time">09:46</div>
+                        <div id="return-dept-station" class="thsr-station">台中</div>
                     </div>
-                    <div id="return-duration" class="through">⏱1:28</div>
-                    <div class="right flex-column">
-                        <div id="return-dest-time" class="ticket-time">10:46</div>
-                        <div id="return-dest-station" class="station">台北</div>
+                    <div id="return-duration" class="thsr-through">⏱1:28</div>
+                    <div class="right thsr-flex-column">
+                        <div id="return-dest-time" class="thsr-ticket-time">10:46</div>
+                        <div id="return-dest-station" class="thsr-station">台北</div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="ticket-detail">
+        <div class="thsr-ticket-detail">
             <span>車廂：</span>
             <span>標準車廂</span>
         </div>
-        <div class="ticket-detail">
+        <div class="thsr-ticket-detail">
             <span>票數：</span>
             <span>全票 2 張</span>
         </div>
 
-        <button onclick="gotoStep3()">確認車次</button>
+        <button class="thsr-search-btn" onclick="gotoStep3()">確認車次</button>
     </div>
 
-    <div class="container">
-        <div class="notice">
-            <div class="notice-title">注意事項</div>
+    <div class="thsr-container">
+        <div class="thsr-notice">
+            <div class="thsr-notice-title">注意事項</div>
             <ol>
                 <li>本網頁顯示內容為目前於訂位系統搜尋到的可訂車次及票價，實際訂位結果仍以「完成訂位」頁面之內容為主。</li>
                 <li>列車時刻及優惠資訊若有變動，以各車站現場公告為準。</li>

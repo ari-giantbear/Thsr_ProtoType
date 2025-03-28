@@ -8,26 +8,38 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <title>高鐵聯票 - 車次</title>
+
     <link rel="stylesheet" href="styles.css?v=1.2.7">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <script src="Dialog.js"></script>
-    <script src="script.js"></script>
+    <script src="script.js?v=1.2.7"></script>
+
+    <script src="./scripts/thsr/jquery-3.6.3.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/l10n/zh_tw.js"></script>
+    <!-- 
+    <script src="./scripts/thsr/jquery-3.6.3.js"></script>
+    <link href="./Styles/Thsr/bootstrap-datepicker3.min.css" rel="stylesheet">
+    <script src="./Scripts/Thsr/bootstrap-datepicker.min.js"></script>
+    <script src="./Scripts/Thsr/bootstrap-datepicker.zh-TW.min.js"></script> 
+    -->
 </head>
 
 <body>
-    <div id="stepNavContainer"></div>
-    <div class="container">
-        <div class="header-options">
-            <div class="left-options">
+    <div id="stepNavContainer" class="thsr-step-nav"></div>
+    <div class="thsr-container">
+        <div class="thsr-header-options">
+            <div class="thsr-left-options">
                 <!-- 行程類型選擇 -->
-                <div class="input-wrapper">
+                <div class="thsr-input-wrapper">
                     <select id="direction" onchange="handleDirectionChange(this)">
                         <option value="OneWay">去程</option>
                         <option value="RoundTrip">去回程</option>
                     </select>
                 </div>
                 <!-- 車廂類型選擇 -->
-                <div class="input-wrapper">
+                <div class="thsr-input-wrapper">
                     <select id="trainClass">
                         <option value="Y">標準車廂</option>
                         <option value="J">商務車廂</option>
@@ -36,13 +48,13 @@
             </div>
         </div>
 
-        <div class="ticket-form">
-            <div class="journey-selection">
-                <div class="station-group">
+        <div class="thsr-ticket-form">
+            <div class="thsr-journey-selection">
+                <div class="thsr-station-group">
                     <!-- 出發站選擇 -->
-                    <div class="station-input">
-                        <i class="fas fa-map-marker-alt orange-icon"></i>
-                        <div class="input-wrapper">
+                    <div class="thsr-station-input">
+                        <i class="fas fa-map-marker-alt thsr-orange-icon"></i>
+                        <div class="thsr-input-wrapper">
                             <label>出發站</label>
                             <select id="dept">
                                 <option value="">請選擇...</option>
@@ -56,9 +68,9 @@
                     -->
 
                     <!-- 抵達站選擇 -->
-                    <div class="station-input">
-                        <i class="fas fa-map-marker-alt orange-icon"></i>
-                        <div class="input-wrapper">
+                    <div class="thsr-station-input">
+                        <i class="fas fa-map-marker-alt thsr-orange-icon"></i>
+                        <div class="thsr-input-wrapper">
                             <label>抵達站</label>
                             <select id="dest">
                                 <option value="">請選擇...</option>
@@ -68,21 +80,21 @@
                 </div>
 
                 <!-- 去程日期時間選擇 -->
-                <div class="date-time-group">
+                <div class="thsr-date-time-group">
                     <!-- 去程日期選擇 -->
-                    <div class="date-time-input">
-                        <i class="far fa-calendar orange-icon"></i>
-                        <div class="input-wrapper">
+                    <div class="thsr-date-time-input">
+                        <i class="far fa-calendar thsr-orange-icon"></i>
+                        <div class="thsr-input-wrapper">
                             <label>去程日期</label>
-                            <input type="date" class="date-input" id="outwardDate">
+                            <input type="text" class="thsr-date-input" id="outwardDate">
                         </div>
                     </div>
                     <!-- 去程時間選擇 -->
-                    <div class="date-time-input">
-                        <i class="far fa-clock orange-icon"></i>
-                        <div class="input-wrapper">
+                    <div class="thsr-date-time-input">
+                        <i class="far fa-clock thsr-orange-icon"></i>
+                        <div class="thsr-input-wrapper">
                             <label>去程時間</label>
-                            <select id="outwardTime" class="time-input">
+                            <select id="outwardTime" class="thsr-time-input">
                                 <option value="">請選擇...</option>
                             </select>
                         </div>
@@ -90,21 +102,21 @@
                 </div>
 
                 <!-- 回程日期時間選擇 -->
-                <div class="date-time-group" id="returnGroup">
+                <div class="thsr-date-time-group" id="returnGroup">
                     <!-- 回程日期選擇 -->
-                    <div class="date-time-input">
-                        <i class="far fa-calendar orange-icon"></i>
-                        <div class="input-wrapper">
+                    <div class="thsr-date-time-input">
+                        <i class="far fa-calendar thsr-orange-icon"></i>
+                        <div class="thsr-input-wrapper">
                             <label>回程日期</label>
-                            <input type="date" class="date-input" id="returnDate">
+                            <input type="date" class="thsr-date-input" id="returnDate">
                         </div>
                     </div>
                     <!-- 回程時間選擇 -->
-                    <div class="date-time-input">
-                        <i class="far fa-clock orange-icon"></i>
-                        <div class="input-wrapper">
+                    <div class="thsr-date-time-input">
+                        <i class="far fa-clock thsr-orange-icon"></i>
+                        <div class="thsr-input-wrapper">
                             <label>回程時間</label>
-                            <select id="returnTime" class="time-input">
+                            <select id="returnTime" class="thsr-time-input">
                                 <option value="">請選擇...</option>
                             </select>
                         </div>
@@ -113,52 +125,52 @@
             </div>
 
             <!-- 票種的數量選擇 -->
-            <div class="ticket-types">
+            <div class="thsr-ticket-types">
                 <!-- 全票數量選擇 -->
-                <div class="ticket-counter">
+                <div class="thsr-ticket-counter">
                     <label>全票</label>
-                    <div class="counter-input">
-                        <button class="minus-btn" onclick="decreaseCount(this)">-</button>
+                    <div class="thsr-counter-input">
+                        <button class="thsr-minus-btn" onclick="decreaseCount(this)">-</button>
                         <input id="pngAdult" type="number" value="1" min="0" max="9" readonly>
-                        <button class="plus-btn" onclick="increaseCount(this)">+</button>
+                        <button class="thsr-plus-btn" onclick="increaseCount(this)">+</button>
                     </div>
                 </div>
                 <!-- 孩童票數量選擇 -->
-                <div class="ticket-counter">
+                <div class="thsr-ticket-counter">
                     <label>孩童票(6-11)</label>
-                    <div class="counter-input">
-                        <button class="minus-btn" onclick="decreaseCount(this)">-</button>
+                    <div class="thsr-counter-input">
+                        <button class="thsr-minus-btn" onclick="decreaseCount(this)">-</button>
                         <input id="pngChild" type="number" value="0" min="0" max="9" readonly>
-                        <button class="plus-btn" onclick="increaseCount(this)">+</button>
+                        <button class="thsr-plus-btn" onclick="increaseCount(this)">+</button>
                     </div>
                 </div>
                 <!-- 愛心票數量選擇 -->
-                <div class="ticket-counter">
+                <div class="thsr-ticket-counter">
                     <label>愛心票</label>
-                    <div class="counter-input">
-                        <button class="minus-btn" onclick="decreaseCount(this)">-</button>
+                    <div class="thsr-counter-input">
+                        <button class="thsr-minus-btn" onclick="decreaseCount(this)">-</button>
                         <input id="pngLove" type="number" value="0" min="0" max="9" readonly>
-                        <button class="plus-btn" onclick="increaseCount(this)">+</button>
+                        <button class="thsr-plus-btn" onclick="increaseCount(this)">+</button>
                     </div>
                 </div>
                 <!-- 敬老票數量選擇 -->
-                <div class="ticket-counter">
+                <div class="thsr-ticket-counter">
                     <label>敬老票(65+)</label>
-                    <div class="counter-input">
-                        <button class="minus-btn" onclick="decreaseCount(this)">-</button>
+                    <div class="thsr-counter-input">
+                        <button class="thsr-minus-btn" onclick="decreaseCount(this)">-</button>
                         <input id="pngElderly" type="number" value="0" min="0" max="9" readonly>
-                        <button class="plus-btn" onclick="increaseCount(this)">+</button>
+                        <button class="thsr-plus-btn" onclick="increaseCount(this)">+</button>
                     </div>
                 </div>
             </div>
 
-            <button onclick="gotoStep2()">開始查詢</button>
+            <button class="thsr-search-btn" onclick="gotoStep2()">開始查詢</button>
         </div>
     </div>
     <script>
         // 生成時間選項
         function generateTimeOptions() {
-            const timeSelects = document.querySelectorAll('.time-input');
+            const timeSelects = document.querySelectorAll('.thsr-time-input');
 
             timeSelects.forEach(select => {
                 for (let hour = 0; hour < 24; hour++) {
@@ -333,8 +345,8 @@
         }
 
         function updateButtonStates(counterInput) {
-            const minusBtn = counterInput.querySelector('.minus-btn');
-            const plusBtn = counterInput.querySelector('.plus-btn');
+            const minusBtn = counterInput.querySelector('.thsr-minus-btn');
+            const plusBtn = counterInput.querySelector('.thsr-plus-btn');
             const input = counterInput.querySelector('input');
             const value = parseInt(input.value);
 
@@ -396,8 +408,66 @@
             }
         }
 
+        function setupFlatDate(element) {
+            flatpickr(element, {
+                minDate: "today",
+                locale: {
+                    weekdays: {
+                        shorthand: ["日", "一", "二", "三", "四", "五", "六"],
+                        longhand: [
+                            "星期日",
+                            "星期一",
+                            "星期二",
+                            "星期三",
+                            "星期四",
+                            "星期五",
+                            "星期六",
+                        ],
+                    },
+                    months: {
+                        shorthand: [
+                            "1月",
+                            "2月",
+                            "3月",
+                            "4月",
+                            "5月",
+                            "6月",
+                            "7月",
+                            "8月",
+                            "9月",
+                            "10月",
+                            "11月",
+                            "12月",
+                        ],
+                        longhand: [
+                            "一月",
+                            "二月",
+                            "三月",
+                            "四月",
+                            "五月",
+                            "六月",
+                            "七月",
+                            "八月",
+                            "九月",
+                            "十月",
+                            "十一月",
+                            "十二月",
+                        ],
+                    },
+                    rangeSeparator: " 至 ",
+                    weekAbbreviation: "週",
+                    scrollTitle: "滾動切換",
+                    toggleTitle: "點擊切換",
+                },
+            });
+        }
+
         // 初始化頁面狀態
         document.addEventListener('DOMContentLoaded', function () {
+            // 初始化日期選擇器
+            setupFlatDate('#outwardDate');
+            setupFlatDate('#returnDate');
+
             // 生成導航步驟
             document.getElementById('stepNavContainer').innerHTML = generateStepNav(1);
 
@@ -405,7 +475,7 @@
             generateTimeOptions();
 
             // 初始化計數器按鈕狀態
-            document.querySelectorAll('.counter-input').forEach(updateButtonStates);
+            document.querySelectorAll('.thsr-counter-input').forEach(updateButtonStates);
 
             // 初始化回程欄位顯示狀態
             const directionSelect = document.getElementById('direction');
@@ -447,8 +517,8 @@
             }
 
             // 初始化站名下拉選單
-            populateStationDropdown('.station-input:first-child select');
-            populateStationDropdown('.station-input:last-child select');
+            populateStationDropdown('.thsr-station-input:first-child select');
+            populateStationDropdown('.thsr-station-input:last-child select');
         });
 
         //產生JSON, 並且將日期時間格式化, 並且將數字轉換為整數, 用於呼叫API
